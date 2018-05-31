@@ -2,18 +2,10 @@
 
 const FIRST_SCREEN_INDEX = 0;
 
-const sortScreens = () => {
+const sortScreens = (screens) => {
   const screensList = [`loader`, `greeting`, `rules`, `game-1`, `game-2`, `game-3`, `stats`];
 
-  screens = screensList.map((item) => {
-    const checkID = (screen) => {
-      return screen.id === item;
-    };
-
-    let element = screens.find(checkID);
-
-    return element;
-  });
+  return screensList.map((item) => screens.find((screen) => screen.id === item));
 };
 
 const showScreen = (screen) => {
@@ -33,9 +25,9 @@ const showPreviousScreen = () => {
 
 const switchScreen = () => {
   if (screenIndex > screens.length - 1) {
-    screenIndex = FIRST_SCREEN_INDEX;
-  } else if (screenIndex < FIRST_SCREEN_INDEX) {
     screenIndex = screens.length - 1;
+  } else if (screenIndex < FIRST_SCREEN_INDEX) {
+    screenIndex = FIRST_SCREEN_INDEX;
   }
 
   showScreen(screens[screenIndex]);
@@ -71,19 +63,17 @@ const createArrows = () => {
 
 const body = document.querySelector(`body`);
 const mainCentral = document.querySelector(`main.central`);
-let screens = Array.from(document.querySelectorAll(`template`)).map((item) => {
-  return {
-    content: item.content,
-    id: item.id
-  };
-});
+let screens = Array.from(document.querySelectorAll(`template`)).map((item) => ({
+  content: item.content,
+  id: item.id
+}));
 
 screens.push({
   content: mainCentral.querySelector(`#main`).cloneNode(true),
   id: `loader`
 });
 
-sortScreens();
+screens = sortScreens(screens);
 
 let screenIndex = FIRST_SCREEN_INDEX;
 
