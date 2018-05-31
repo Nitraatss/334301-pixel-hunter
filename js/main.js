@@ -1,53 +1,19 @@
 'use strict';
 
-const SCREEN_INDEX = {
-  FIRST: 0,
-  SECOND: 1,
-  THIRD: 2
-};
+const FIRST_SCREEN_INDEX = 0;
 
-const changeElementPosition = (arr, oldIndex, newIndex) => {
-  if (newIndex >= arr.length) {
-    let k = newIndex - arr.length + 1;
-    while (k--) {
-      arr.push(undefined);
-    }
-  }
-  arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+const sortScreens = () => {
+  const screensList = [`loader`, `greeting`, `rules`, `game-1`, `game-2`, `game-3`, `stats`];
 
-  return arr;
-};
+  screens = screensList.map((item) => {
+    const checkID = (screen) => {
+      return screen.id === item;
+    };
 
-const sortScreens = (screens) => {
-  let i;
+    let element = screens.find(checkID);
 
-  for (i = SCREEN_INDEX.FIRST; i < screens.length; i++) {
-    if (screens[i].id === `loader`) {
-      changeElementPosition(screens, i, SCREEN_INDEX.FIRST);
-      break;
-    }
-  }
-
-  for (i = SCREEN_INDEX.SECOND; i < screens.length; i++) {
-    if (screens[i].id === `greeting`) {
-      changeElementPosition(screens, i, SCREEN_INDEX.SECOND);
-      break;
-    }
-  }
-
-  for (i = SCREEN_INDEX.THIRD; i < screens.length; i++) {
-    if (screens[i].id === `greeting`) {
-      changeElementPosition(screens, i, SCREEN_INDEX.THIRD);
-      break;
-    }
-  }
-
-  for (i = SCREEN_INDEX.THIRD + 1; i < screens.length; i++) {
-    if (screens[i].id === `stats`) {
-      changeElementPosition(screens, i, (screens.length - 1));
-      break;
-    }
-  }
+    return element;
+  });
 };
 
 const showScreen = (screen) => {
@@ -67,8 +33,8 @@ const showPreviousScreen = () => {
 
 const switchScreen = () => {
   if (screenIndex > screens.length - 1) {
-    screenIndex = SCREEN_INDEX.FIRST;
-  } else if (screenIndex < SCREEN_INDEX.FIRST) {
+    screenIndex = FIRST_SCREEN_INDEX;
+  } else if (screenIndex < FIRST_SCREEN_INDEX) {
     screenIndex = screens.length - 1;
   }
 
@@ -105,7 +71,7 @@ const createArrows = () => {
 
 const body = document.querySelector(`body`);
 const mainCentral = document.querySelector(`main.central`);
-const screens = Array.from(document.querySelectorAll(`template`)).map((item) => {
+let screens = Array.from(document.querySelectorAll(`template`)).map((item) => {
   return {
     content: item.content,
     id: item.id
@@ -117,9 +83,10 @@ screens.push({
   id: `loader`
 });
 
-sortScreens(screens);
+sortScreens();
 
-let screenIndex = SCREEN_INDEX.FIRST;
+let screenIndex = FIRST_SCREEN_INDEX;
+
 switchScreen(screenIndex);
 createArrows();
 
