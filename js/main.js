@@ -75,7 +75,7 @@ const switchScreen = () => {
   showScreen(screens[screenIndex]);
 };
 
-const creatArrows = () => {
+const createArrows = () => {
   const arrowsElement = document.createElement(`div`);
   const arrowsMarkup = `
     <style>
@@ -121,7 +121,7 @@ sortScreens(screens);
 
 let screenIndex = SCREEN_INDEX.FIRST;
 switchScreen(screenIndex);
-creatArrows();
+createArrows();
 
 const arrowsButtons = document.querySelectorAll(`button.arrows__btn`);
 const leftArrow = arrowsButtons[0];
