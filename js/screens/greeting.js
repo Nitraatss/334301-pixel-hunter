@@ -1,6 +1,6 @@
-import creatDOMElement from '../../js/create-dom-element.js';
-import showScreen from '../../js/show-screen.js';
-import rules from '../../js/screens/rules.js';
+import creatDOMElement from '../../js/create-dom-element';
+import showScreen from '../../js/show-screen';
+import rules from './rules';
 
 const markup = `
   <div class="greeting central--blur">
@@ -28,10 +28,8 @@ const markup = `
   </footer>
 `;
 
-const id = `greeting`;
-
 const greeting = {
-  screen: creatDOMElement(markup, id),
+  screen: creatDOMElement(markup),
   init: () => {
     const onGreetingContinueClick = () => {
       showScreen(rules);

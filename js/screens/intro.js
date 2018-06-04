@@ -1,6 +1,6 @@
-import creatDOMElement from '../../js/create-dom-element.js';
-import showScreen from '../../js/show-screen.js';
-import greeting from '../../js/screens/greeting.js';
+import creatDOMElement from '../../js/create-dom-element';
+import showScreen from '../../js/show-screen';
+import greeting from './greeting';
 
 const markup = `
   <div id="main" class="central__content">
@@ -21,10 +21,8 @@ const markup = `
   </footer>
 `;
 
-const id = `intro`;
-
 const intro = {
-  screen: creatDOMElement(markup, id),
+  screen: creatDOMElement(markup),
   init: () => {
     const onIntroAsteriskClick = () => {
       showScreen(greeting);

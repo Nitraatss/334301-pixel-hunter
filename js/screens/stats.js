@@ -1,6 +1,6 @@
-import creatDOMElement from '../../js/create-dom-element.js';
-import showScreen from '../../js/show-screen.js';
-import greeting from '../../js/screens/greeting.js';
+import creatDOMElement from '../../js/create-dom-element';
+import showScreen from '../../js/show-screen';
+import greeting from './greeting';
 
 const markup = `
   <header class="header">
@@ -146,10 +146,8 @@ const markup = `
   </section>
 `;
 
-const id = `stats`;
-
 const stats = {
-  screen: creatDOMElement(markup, id),
+  screen: creatDOMElement(markup),
   init: () => {
     const onButtonBackClick = () => {
       showScreen(greeting);

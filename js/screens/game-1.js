@@ -1,6 +1,6 @@
-import creatDOMElement from '../../js/create-dom-element.js';
-import showScreen from '../../js/show-screen.js';
-import gameTwo from '../../js/screens/game-2.js';
+import creatDOMElement from '../../js/create-dom-element';
+import showScreen from '../../js/show-screen';
+import gameTwo from './game-2';
 
 const markup = `
   <header class="header">
@@ -70,10 +70,8 @@ const markup = `
   </footer>
 `;
 
-const id = `game-1`;
-
 const gameOne = {
-  screen: creatDOMElement(markup, id),
+  screen: creatDOMElement(markup),
   init: () => {
     const onInputChange = (evtInp) => {
       if (evtInp.target.name === `question1`) {

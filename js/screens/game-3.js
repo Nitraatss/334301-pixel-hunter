@@ -1,6 +1,6 @@
-import creatDOMElement from '../../js/create-dom-element.js';
-import showScreen from '../../js/show-screen.js';
-import stats from '../../js/screens/stats.js';
+import creatDOMElement from '../../js/create-dom-element';
+import showScreen from '../../js/show-screen';
+import stats from './stats';
 
 const markup = `
   <header class="header">
@@ -57,10 +57,8 @@ const markup = `
   </footer>
 `;
 
-const id = `game-3`;
-
 const gameThree = {
-  screen: creatDOMElement(markup, id),
+  screen: creatDOMElement(markup),
   init: () => {
     const onOptionCLick = () => {
       showScreen(stats);

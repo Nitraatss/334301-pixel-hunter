@@ -1,6 +1,6 @@
-import creatDOMElement from '../../js/create-dom-element.js';
-import showScreen from '../../js/show-screen.js';
-import gameOne from '../../js/screens/game-1.js';
+import creatDOMElement from '../../js/create-dom-element';
+import showScreen from '../../js/show-screen';
+import gameOne from './game-1';
 
 const markup = `
   <header class="header">
@@ -39,10 +39,8 @@ const markup = `
   </footer>
 `;
 
-const id = `rules`;
-
 const rules = {
-  screen: creatDOMElement(markup, id),
+  screen: creatDOMElement(markup),
   init: () => {
     const onRulesInputChange = () => {
       if (rulesInput.value) {

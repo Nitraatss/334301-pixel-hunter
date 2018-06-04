@@ -1,9 +1,8 @@
-const createDOMElement = (markup, id) => {
+const createDOMElement = (markup) => {
   let newElement;
 
   newElement = document.createElement(`div`);
 
-  newElement.id = id;
   newElement.innerHTML = markup;
 
   return newElement;

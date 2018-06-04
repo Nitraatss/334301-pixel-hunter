@@ -1,6 +1,6 @@
-import creatDOMElement from '../../js/create-dom-element.js';
-import showScreen from '../../js/show-screen.js';
-import gameThree from '../../js/screens/game-3.js';
+import creatDOMElement from '../../js/create-dom-element';
+import showScreen from '../../js/show-screen';
+import gameThree from './game-3';
 
 const markup = `
   <header class="header">
@@ -59,10 +59,8 @@ const markup = `
   </footer>
 `;
 
-const id = `game-2`;
-
 const gameTwo = {
-  screen: creatDOMElement(markup, id),
+  screen: creatDOMElement(markup),
   init: () => {
     const onAnswerCLick = () => {
       showScreen(gameThree);
