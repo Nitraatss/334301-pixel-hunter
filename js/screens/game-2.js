@@ -62,7 +62,7 @@ const markup = `
 
 const gameTwo = creatDOMElement(markup);
 
-activateBackButton();
+activateBackButton(gameTwo);
 
 const onAnswerCLick = () => {
   showScreen(gameThree);

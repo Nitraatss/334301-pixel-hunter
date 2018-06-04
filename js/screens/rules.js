@@ -42,7 +42,7 @@ const markup = `
 
 const rules = creatDOMElement(markup);
 
-activateBackButton();
+activateBackButton(rules);
 
 const onRulesInputChange = () => {
   rulesButton.disabled = rulesInput.value ? false : true;

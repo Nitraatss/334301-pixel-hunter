@@ -73,7 +73,7 @@ const markup = `
 
 const gameOne = creatDOMElement(markup);
 
-activateBackButton();
+activateBackButton(gameOne);
 
 const onInputChange = (evtInp) => {
   if (evtInp.target.name === `question1`) {
