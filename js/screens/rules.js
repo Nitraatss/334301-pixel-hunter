@@ -1,5 +1,6 @@
 import creatDOMElement from '../create-dom-element';
 import showScreen from '../show-screen';
+import activateBackButton from '../activate-back-button';
 import gameOne from './game-1';
 
 const markup = `
@@ -41,12 +42,10 @@ const markup = `
 
 const rules = creatDOMElement(markup);
 
+activateBackButton();
+
 const onRulesInputChange = () => {
-  if (rulesInput.value) {
-    rulesButton.disabled = false;
-  } else {
-    rulesButton.disabled = true;
-  }
+  rulesButton.disabled = rulesInput.value ? false : true;
 };
 
 const onRulesButtonClick = () => {
@@ -56,7 +55,7 @@ const onRulesButtonClick = () => {
 const rulesInput = rules.querySelector(`.rules__input`);
 const rulesButton = rules.querySelector(`.rules__button`);
 
-rulesInput.addEventListener(`change`, onRulesInputChange);
+rulesInput.addEventListener(`input`, onRulesInputChange);
 rulesButton.addEventListener(`click`, onRulesButtonClick);
 
 export default rules;

@@ -1,5 +1,6 @@
 import creatDOMElement from '../create-dom-element';
 import showScreen from '../show-screen';
+import activateBackButton from '../activate-back-button';
 import stats from './stats';
 
 const markup = `
@@ -58,6 +59,8 @@ const markup = `
 `;
 
 const gameThree = creatDOMElement(markup);
+
+activateBackButton();
 
 const onOptionCLick = () => {
   showScreen(stats);

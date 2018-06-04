@@ -1,5 +1,6 @@
 import creatDOMElement from '../create-dom-element';
 import showScreen from '../show-screen';
+import activateBackButton from '../activate-back-button';
 import gameTwo from './game-2';
 
 const markup = `
@@ -71,6 +72,8 @@ const markup = `
 `;
 
 const gameOne = creatDOMElement(markup);
+
+activateBackButton();
 
 const onInputChange = (evtInp) => {
   if (evtInp.target.name === `question1`) {

@@ -1,5 +1,6 @@
 import creatDOMElement from '../create-dom-element';
 import showScreen from '../show-screen';
+import activateBackButton from '../activate-back-button';
 import gameThree from './game-3';
 
 const markup = `
@@ -60,6 +61,8 @@ const markup = `
 `;
 
 const gameTwo = creatDOMElement(markup);
+
+activateBackButton();
 
 const onAnswerCLick = () => {
   showScreen(gameThree);
