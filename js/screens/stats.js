@@ -1,6 +1,5 @@
 import creatDOMElement from '../create-dom-element';
-import showScreen from '../show-screen';
-import greeting from './greeting';
+import activateBackButton from '../activate-back-button';
 
 const markup = `
   <header class="header">
@@ -148,12 +147,6 @@ const markup = `
 
 const stats = creatDOMElement(markup);
 
-const onButtonBackClick = () => {
-  showScreen(greeting);
-};
-
-const buttonBack = stats.querySelector(`button.back`);
-
-buttonBack.addEventListener(`click`, onButtonBackClick);
+activateBackButton(stats);
 
 export default stats;
