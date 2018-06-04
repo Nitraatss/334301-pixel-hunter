@@ -1,5 +1,5 @@
-import creatDOMElement from '../../js/create-dom-element';
-import showScreen from '../../js/show-screen';
+import creatDOMElement from '../create-dom-element';
+import showScreen from '../show-screen';
 import gameOne from './game-1';
 
 const markup = `
@@ -39,30 +39,24 @@ const markup = `
   </footer>
 `;
 
-const rules = {
-  screen: creatDOMElement(markup),
-  init: () => {
-    const onRulesInputChange = () => {
-      if (rulesInput.value) {
-        rulesButton.disabled = false;
-      } else {
-        rulesButton.disabled = true;
-      }
-    };
+const rules = creatDOMElement(markup);
 
-    const onRulesButtonClick = () => {
-      showScreen(gameOne);
-      rulesInput.removeEventListener(`change`, onRulesInputChange);
-      rulesButton.removeEventListener(`click`, onRulesButtonClick);
-    };
-
-    const rulesFrom = document.querySelector(`.rules__form`);
-    const rulesInput = rulesFrom.querySelector(`.rules__input`);
-    const rulesButton = rulesFrom.querySelector(`.rules__button`);
-
-    rulesInput.addEventListener(`change`, onRulesInputChange);
-    rulesButton.addEventListener(`click`, onRulesButtonClick);
+const onRulesInputChange = () => {
+  if (rulesInput.value) {
+    rulesButton.disabled = false;
+  } else {
+    rulesButton.disabled = true;
   }
 };
+
+const onRulesButtonClick = () => {
+  showScreen(gameOne);
+};
+
+const rulesInput = rules.querySelector(`.rules__input`);
+const rulesButton = rules.querySelector(`.rules__button`);
+
+rulesInput.addEventListener(`change`, onRulesInputChange);
+rulesButton.addEventListener(`click`, onRulesButtonClick);
 
 export default rules;

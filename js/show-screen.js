@@ -1,11 +1,8 @@
 const mainCentral = document.querySelector(`main.central`);
 
-/* Отображение определьной страницы */
-const showScreen = ({screen, init}) => {
+const showScreen = (screen) => {
   mainCentral.innerHTML = ``;
   mainCentral.appendChild(screen);
-
-  init();
 };
 
 export default showScreen;

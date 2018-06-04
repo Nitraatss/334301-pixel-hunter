@@ -1,5 +1,5 @@
-import creatDOMElement from '../../js/create-dom-element';
-import showScreen from '../../js/show-screen';
+import creatDOMElement from '../create-dom-element';
+import showScreen from '../show-screen';
 import greeting from './greeting';
 
 const markup = `
@@ -146,19 +146,14 @@ const markup = `
   </section>
 `;
 
-const stats = {
-  screen: creatDOMElement(markup),
-  init: () => {
-    const onButtonBackClick = () => {
-      showScreen(greeting);
+const stats = creatDOMElement(markup);
 
-      buttonBack.removeEventListener(`click`, onButtonBackClick);
-    };
-
-    const buttonBack = document.querySelector(`button.back`);
-
-    buttonBack.addEventListener(`click`, onButtonBackClick);
-  }
+const onButtonBackClick = () => {
+  showScreen(greeting);
 };
+
+const buttonBack = stats.querySelector(`button.back`);
+
+buttonBack.addEventListener(`click`, onButtonBackClick);
 
 export default stats;

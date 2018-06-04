@@ -1,5 +1,5 @@
-import creatDOMElement from '../../js/create-dom-element';
-import showScreen from '../../js/show-screen';
+import creatDOMElement from '../create-dom-element';
+import showScreen from '../show-screen';
 import rules from './rules';
 
 const markup = `
@@ -28,19 +28,15 @@ const markup = `
   </footer>
 `;
 
-const greeting = {
-  screen: creatDOMElement(markup),
-  init: () => {
-    const onGreetingContinueClick = () => {
-      showScreen(rules);
+const greeting = creatDOMElement(markup);
 
-      greetingContinue.removeEventListener(`click`, onGreetingContinueClick);
-    };
-
-    const greetingContinue = document.querySelector(`.greeting__continue`);
-
-    greetingContinue.addEventListener(`click`, onGreetingContinueClick);
-  }
+const onGreetingContinueClick = () => {
+  showScreen(rules);
 };
+
+const greetingContinue = greeting.querySelector(`.greeting__continue`);
+
+greetingContinue.addEventListener(`click`, onGreetingContinueClick);
+
 
 export default greeting;

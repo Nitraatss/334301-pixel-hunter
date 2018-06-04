@@ -1,5 +1,5 @@
-import creatDOMElement from '../../js/create-dom-element';
-import showScreen from '../../js/show-screen';
+import creatDOMElement from '../create-dom-element';
+import showScreen from '../show-screen';
 import greeting from './greeting';
 
 const markup = `
@@ -21,19 +21,14 @@ const markup = `
   </footer>
 `;
 
-const intro = {
-  screen: creatDOMElement(markup),
-  init: () => {
-    const onIntroAsteriskClick = () => {
-      showScreen(greeting);
+const intro = creatDOMElement(markup);
 
-      introAsterisk.removeEventListener(`click`, onIntroAsteriskClick);
-    };
-
-    const introAsterisk = document.querySelector(`.intro__asterisk`);
-
-    introAsterisk.addEventListener(`click`, onIntroAsteriskClick);
-  }
+const onIntroAsteriskClick = () => {
+  showScreen(greeting);
 };
+
+const introAsterisk = intro.querySelector(`.intro__asterisk`);
+
+introAsterisk.addEventListener(`click`, onIntroAsteriskClick);
 
 export default intro;

@@ -1,5 +1,5 @@
-import creatDOMElement from '../../js/create-dom-element';
-import showScreen from '../../js/show-screen';
+import creatDOMElement from '../create-dom-element';
+import showScreen from '../show-screen';
 import gameTwo from './game-2';
 
 const markup = `
@@ -70,35 +70,27 @@ const markup = `
   </footer>
 `;
 
-const gameOne = {
-  screen: creatDOMElement(markup),
-  init: () => {
-    const onInputChange = (evtInp) => {
-      if (evtInp.target.name === `question1`) {
-        firstQuestionChecked = true;
-      } else {
-        secondQuestionChecked = true;
-      }
+const gameOne = creatDOMElement(markup);
 
-      if (firstQuestionChecked && secondQuestionChecked) {
-        showScreen(gameTwo);
+const onInputChange = (evtInp) => {
+  if (evtInp.target.name === `question1`) {
+    firstQuestionChecked = true;
+  } else {
+    secondQuestionChecked = true;
+  }
 
-        inputs.forEach((input) => {
-          input.removeEventListener(`change`, onInputChange);
-        });
-      }
-    };
-
-    const gameContent = document.querySelector(`.game__content`);
-    const inputs = gameContent.querySelectorAll(`input`);
-
-    let firstQuestionChecked = false;
-    let secondQuestionChecked = false;
-
-    inputs.forEach((input) => {
-      input.addEventListener(`change`, onInputChange);
-    });
+  if (firstQuestionChecked && secondQuestionChecked) {
+    showScreen(gameTwo);
   }
 };
+
+const inputs = gameOne.querySelectorAll(`input`);
+
+let firstQuestionChecked = false;
+let secondQuestionChecked = false;
+
+inputs.forEach((input) => {
+  input.addEventListener(`change`, onInputChange);
+});
 
 export default gameOne;

@@ -1,7 +1,5 @@
 const createDOMElement = (markup) => {
-  let newElement;
-
-  newElement = document.createElement(`div`);
+  const newElement = document.createElement(`div`);
 
   newElement.innerHTML = markup;
 

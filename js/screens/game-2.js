@@ -1,5 +1,5 @@
-import creatDOMElement from '../../js/create-dom-element';
-import showScreen from '../../js/show-screen';
+import creatDOMElement from '../create-dom-element';
+import showScreen from '../show-screen';
 import gameThree from './game-3';
 
 const markup = `
@@ -59,23 +59,17 @@ const markup = `
   </footer>
 `;
 
-const gameTwo = {
-  screen: creatDOMElement(markup),
-  init: () => {
-    const onAnswerCLick = () => {
-      showScreen(gameThree);
+const gameTwo = creatDOMElement(markup);
 
-      gameAnswers.forEach((answer) => {
-        answer.removeEventListener(`click`, onAnswerCLick);
-      });
-    };
-
-    const gameAnswers = document.querySelectorAll(`.game__answer`);
-
-    gameAnswers.forEach((answer) => {
-      answer.addEventListener(`click`, onAnswerCLick);
-    });
-  }
+const onAnswerCLick = () => {
+  showScreen(gameThree);
 };
+
+const gameAnswers = gameTwo.querySelectorAll(`.game__answer`);
+
+gameAnswers.forEach((answer) => {
+  answer.addEventListener(`click`, onAnswerCLick);
+});
+
 
 export default gameTwo;
