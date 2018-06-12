@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {formTestGameState, showResults} from './show-results.js';
+import {formTestGameState, showResults} from './show-results';
 
 describe(`Show results test`, () => {
   let currentGame;

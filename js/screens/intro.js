@@ -1,34 +1,29 @@
 import creatDOMElement from '../create-dom-element';
-import showScreen from '../show-screen';
-import greeting from './greeting';
+import showFooter from './parts/show-footer';
+import showNextScreen from '../show-next-screen';
 
-const markup = `
+const formMarkup = () => `
   <div id="main" class="central__content">
     <div id="intro" class="intro">
       <h1 class="intro__asterisk">*</h1>
       <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
     </div>
   </div>
-  <footer class="footer">
-    <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-    <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-    <div class="footer__social-links">
-      <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-      <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-      <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-      <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-    </div>
-  </footer>
+  ${showFooter()}
 `;
 
-const intro = creatDOMElement(markup);
+const intro = {
+  element: () => creatDOMElement(formMarkup()),
 
-const onIntroAsteriskClick = () => {
-  showScreen(greeting);
+  init: () => {
+    const onIntroAsteriskClick = () => {
+      showNextScreen();
+    };
+
+    const introAsterisk = document.querySelector(`.intro__asterisk`);
+
+    introAsterisk.addEventListener(`click`, onIntroAsteriskClick);
+  }
 };
-
-const introAsterisk = intro.querySelector(`.intro__asterisk`);
-
-introAsterisk.addEventListener(`click`, onIntroAsteriskClick);
 
 export default intro;

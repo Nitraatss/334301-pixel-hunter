@@ -1,12 +1,14 @@
 import greeting from './screens/greeting';
 import showScreen from './show-screen';
+import gameState from './game-state';
 
-const activateBackButton = (parent) => {
+const activateBackButton = () => {
   const onButtonBackClick = () => {
+    gameState.resetParams();
     showScreen(greeting);
   };
 
-  const buttonBack = parent.querySelector(`button.back`);
+  const buttonBack = document.querySelector(`button.back`);
 
   buttonBack.addEventListener(`click`, onButtonBackClick);
 };

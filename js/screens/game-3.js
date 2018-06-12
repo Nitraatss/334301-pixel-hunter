@@ -1,75 +1,73 @@
 import creatDOMElement from '../create-dom-element';
-import showScreen from '../show-screen';
 import activateBackButton from '../activate-back-button';
-import stats from './stats';
+import showFooter from './parts/show-footer';
+import formGameHeader from './parts/form-game-header';
+import formStatsListMarkup from './parts/form-stats-list-markup';
+import showNextScreen from '../show-next-screen';
+import gameState from '../game-state';
+import getCurrentQuestion from '../get-current-question';
 
-const markup = `
-  <header class="header">
-    <div class="header__back">
-      <button class="back">
-        <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-        <img src="img/logo_small.svg" width="101" height="44">
-      </button>
-    </div>
-    <h1 class="game__timer">NN</h1>
-    <div class="game__lives">
-      <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-      <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-      <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-    </div>
-  </header>
+const AVERAGE_TIME = 15;
+
+const formOptionsMArkup = (options) =>
+  options.map((option) => {
+    return `
+      <div class="game__option">
+        <img src="${option.src}" alt="${option.alt}" width="304" height="455">
+      </div>
+    `;
+  }).join(` `);
+
+const formMarkup = (currentQuestion) => `
+  ${formGameHeader(gameState.lives, gameState.timeLimit)}
   <div class="game">
     <p class="game__task">Найдите рисунок среди изображений</p>
     <form class="game__content  game__content--triple">
-      <div class="game__option">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-      </div>
-      <div class="game__option  game__option--selected">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-      </div>
-      <div class="game__option">
-        <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-      </div>
+      ${formOptionsMArkup(currentQuestion.options)}
     </form>
     <div class="stats">
       <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--unknown"></li>
+        ${formStatsListMarkup(gameState.answers)}
       </ul>
     </div>
   </div>
-  <footer class="footer">
-    <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-    <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-    <div class="footer__social-links">
-      <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-      <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-      <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-      <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-    </div>
-  </footer>
+  ${showFooter()}
 `;
 
-const gameThree = creatDOMElement(markup);
+const checkAnswer = (answer) => {
+  if (answer === `photo`) {
+    gameState.addAnswer({
+      correct: true,
+      time: AVERAGE_TIME
+    });
+  } else {
+    gameState.addAnswer({
+      correct: false,
+      time: AVERAGE_TIME
+    });
 
-activateBackButton(gameThree);
-
-const onOptionCLick = () => {
-  showScreen(stats);
+    gameState.looseLife();
+  }
 };
 
-const gameOptions = gameThree.querySelectorAll(`.game__option`);
+const gameThree = {
+  element: () => creatDOMElement(formMarkup(getCurrentQuestion())),
+  init: () => {
+    activateBackButton();
 
-gameOptions.forEach((option) => {
-  option.addEventListener(`click`, onOptionCLick);
-});
+    const onOptionClick = (evt) => {
+      const currentAnswer = evt.target.firstElementChild.alt;
+
+      checkAnswer(currentAnswer);
+      showNextScreen();
+    };
+
+    const gameOptions = document.querySelectorAll(`.game__option`);
+
+    gameOptions.forEach((option) => {
+      option.addEventListener(`click`, onOptionClick);
+    });
+  }
+};
 
 export default gameThree;

@@ -1,4 +1,3 @@
-import showScreen from './show-screen';
-import intro from './screens/intro';
+import showNextScreen from './show-next-screen';
 
-showScreen(intro);
+showNextScreen();
