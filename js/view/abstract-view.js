@@ -8,7 +8,7 @@ class AbstractView {
 
   get element() {
     if (!this._element) {
-      this.render();
+      this._element = this.render();
 
       this.bind();
     }

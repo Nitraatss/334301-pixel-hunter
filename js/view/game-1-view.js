@@ -52,11 +52,11 @@ class GameOneView extends AbstractView {
   }
 
   render() {
-    this._element = createDOMElement(this.template);
+    return createDOMElement(this.template);
   }
 
   bind() {
-    const inputs = this._element.querySelectorAll(`input`);
+    const inputs = this.element.querySelectorAll(`input`);
 
     inputs.forEach((input) => {
       input.addEventListener(`change`, (evtInp) => {
@@ -64,7 +64,7 @@ class GameOneView extends AbstractView {
       });
     });
 
-    activateBackButton(this._element);
+    activateBackButton(this.element);
   }
 
   onInputChange() {

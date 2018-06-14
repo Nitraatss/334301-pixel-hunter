@@ -88,6 +88,9 @@ class GameServices {
   }
 
   formGameThreeQuestion(data) {
+    let photoIndex;
+    let firstPhotoIndex;
+
     const question = {
       options: [],
       type: `game-3`
@@ -99,8 +102,18 @@ class GameServices {
     });
 
     for (let i = 0; i < 2; i++) {
+      if (!i) {
+        firstPhotoIndex = getRandomInt(0, (data.photos.length - 1));
+
+        photoIndex = firstPhotoIndex;
+      } else {
+        while (photoIndex === firstPhotoIndex) {
+          photoIndex = getRandomInt(0, (data.photos.length - 1));
+        }
+      }
+
       question.options.push({
-        src: data.photos[getRandomInt(0, (data.photos.length - 1))],
+        src: data.photos[photoIndex],
         alt: `photo`
       });
     }

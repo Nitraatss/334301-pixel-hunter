@@ -39,12 +39,12 @@ class RulesView extends AbstractView {
   }
 
   render() {
-    this._element = createDOMElement(this.template);
+    return createDOMElement(this.template);
   }
 
   bind() {
-    const rulesInput = this._element.querySelector(`.rules__input`);
-    const rulesButton = this._element.querySelector(`.rules__button`);
+    const rulesInput = this.element.querySelector(`.rules__input`);
+    const rulesButton = this.element.querySelector(`.rules__button`);
 
     rulesInput.addEventListener(`input`, () => {
       this.onRulesInputChange(rulesButton, rulesInput);
@@ -53,7 +53,7 @@ class RulesView extends AbstractView {
       this.onRulesButtonClick(rulesInput);
     });
 
-    activateBackButton(this._element);
+    activateBackButton(this.element);
   }
 
   onRulesInputChange() {

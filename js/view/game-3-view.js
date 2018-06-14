@@ -31,11 +31,11 @@ class GameThreeView extends AbstractView {
   }
 
   render() {
-    this._element = createDOMElement(this.template);
+    return createDOMElement(this.template);
   }
 
   bind() {
-    const gameOptions = this._element.querySelectorAll(`.game__option`);
+    const gameOptions = this.element.querySelectorAll(`.game__option`);
 
     gameOptions.forEach((option) => {
       option.addEventListener(`click`, (evtOp) => {
@@ -43,7 +43,7 @@ class GameThreeView extends AbstractView {
       });
     });
 
-    activateBackButton(this._element);
+    activateBackButton(this.element);
   }
 
   formOptionsMArkup(options) {

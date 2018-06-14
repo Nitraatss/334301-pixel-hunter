@@ -41,11 +41,11 @@ class GameTwoView extends AbstractView {
   }
 
   render() {
-    this._element = createDOMElement(this.template);
+    return createDOMElement(this.template);
   }
 
   bind() {
-    const gameAnswers = this._element.querySelectorAll(`.game__answer`);
+    const gameAnswers = this.element.querySelectorAll(`.game__answer`);
 
     gameAnswers.forEach((answer) => {
       answer.querySelector(`input`).addEventListener(`change`, (evtInp) => {
@@ -53,7 +53,7 @@ class GameTwoView extends AbstractView {
       });
     });
 
-    activateBackButton(this._element);
+    activateBackButton(this.element);
   }
 
   onInputChange() {

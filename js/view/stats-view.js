@@ -33,11 +33,11 @@ class GameThreeView extends AbstractView {
   }
 
   render() {
-    this._element = createDOMElement(this.template);
+    return createDOMElement(this.template);
   }
 
   bind() {
-    activateBackButton(this._element);
+    activateBackButton(this.element);
   }
 
   checkAnswers() {

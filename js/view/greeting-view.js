@@ -27,11 +27,11 @@ class GreetingView extends AbstractView {
   }
 
   render() {
-    this._element = createDOMElement(this.template);
+    return createDOMElement(this.template);
   }
 
   bind() {
-    const mainPlay = this._element.querySelector(`.greeting__continue`);
+    const mainPlay = this.element.querySelector(`.greeting__continue`);
 
     mainPlay.addEventListener(`click`, () => {
       this.onGreetingContinueClick();

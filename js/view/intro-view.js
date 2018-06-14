@@ -20,11 +20,11 @@ class IntroView extends AbstractView {
   }
 
   render() {
-    this._element = createDOMElement(this.template);
+    return createDOMElement(this.template);
   }
 
   bind() {
-    const mainPlay = this._element.querySelector(`.intro__asterisk`);
+    const mainPlay = this.element.querySelector(`.intro__asterisk`);
 
     mainPlay.addEventListener(`click`, () => {
       this.onIntroAsteriskClick();
