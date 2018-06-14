@@ -1,9 +1,9 @@
 const mainCentral = document.querySelector(`main.central`);
 
 const showScreen = (screen) => {
+  const newScreen = screen();
   mainCentral.innerHTML = ``;
-  mainCentral.appendChild(screen.element());
-  screen.init();
+  mainCentral.appendChild(newScreen.element);
 };
 
 export default showScreen;

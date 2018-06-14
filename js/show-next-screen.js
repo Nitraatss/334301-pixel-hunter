@@ -15,6 +15,7 @@ const RULES_SCREEN_INDEX = 3;
 const STARTING_GAME_SCREEN_INDEX = 4;
 const FINAL_GAME_SCREEN_INDEX = 13;
 const ANSWERS_NUMBER = 10;
+const NO_LIVES = 0;
 
 const showGame = (questions, screenIndex) => {
   if (questions[screenIndex - STARTING_GAME_SCREEN_INDEX].type === `game-1`) {
@@ -31,7 +32,7 @@ const showGame = (questions, screenIndex) => {
 };
 
 const showNextScreen = () => {
-  if (!gameState.lives) {
+  if (gameState.lives < NO_LIVES) {
     if (gameState.answers.length !== ANSWERS_NUMBER) {
       let i = gameState.answers.length;
       while (i < (ANSWERS_NUMBER)) {
