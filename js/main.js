@@ -1,3 +1,3 @@
-import showNextScreen from './show-next-screen';
+import Application from './application';
 
-showNextScreen();
+Application.showIntro();

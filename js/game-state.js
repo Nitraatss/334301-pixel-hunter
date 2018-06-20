@@ -3,13 +3,13 @@ class GameModel {
     this.playerName = ``;
     this.lives = 3;
     this.answers = [];
-    this.screenIndex = 0;
+    this.gameIndex = -1;
     this.timeLimit = 30;
     this.result = ``;
   }
 
-  screenIndexInc() {
-    this.screenIndex = this.screenIndex + 1;
+  gameIndexInc() {
+    this.gameIndex = this.gameIndex + 1;
   }
 
   looseLife() {
@@ -31,7 +31,7 @@ class GameModel {
   resetParams() {
     this.lives = 3;
     this.answers = [];
-    this.screenIndex = 3;
+    this.gameIndex = -1;
   }
 }
 

@@ -1,5 +1,4 @@
 const MINIMUM_LIVES = -1;
-const MINIMUM_CORRECT_ANSWERS_NUMBER = 10;
 const NORMAL_ANSWER_SCORE = 100;
 const SLOW_ANSWER_SCORE = 50;
 const FAST_ANSWER_SCORE = 150;
@@ -77,24 +76,10 @@ const calculateScore = (answers, lives) => {
   return result;
 };
 
-const calcultateCorrectAnswersNumber = (answers) => {
-  let correctAnswersNumber = 0;
-
-  answers.forEach((answer) => {
-    if (answer.correct) {
-      correctAnswersNumber = correctAnswersNumber + 1;
-    }
-  });
-
-  return correctAnswersNumber;
-};
-
 export const showResults = (answers, lives) => {
-  const correctAnswersNumber = calcultateCorrectAnswersNumber(answers);
-
   let finalResult;
 
-  if (lives > MINIMUM_LIVES && correctAnswersNumber === MINIMUM_CORRECT_ANSWERS_NUMBER) {
+  if (lives > MINIMUM_LIVES) {
     finalResult = calculateScore(answers, lives);
   } else {
     finalResult = LOOSER_SCORE;

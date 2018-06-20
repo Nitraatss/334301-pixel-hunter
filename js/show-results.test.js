@@ -5,9 +5,15 @@ describe(`Show results test`, () => {
   let currentGame;
 
   it(`Out of lives`, () => {
-    currentGame = formTestGameState(4, 5, 0, 1, 0);
+    currentGame = formTestGameState(4, 5, 0, 1, -1);
 
     assert.equal(showResults(currentGame.answers, currentGame.lives), `-1`);
+  });
+
+  it(`Last chanse`, () => {
+    currentGame = formTestGameState(4, 5, 0, 1, 0);
+
+    assert.equal(showResults(currentGame.answers, currentGame.lives), `1150`);
   });
 
   it(`All normal answers`, () => {
@@ -37,7 +43,7 @@ describe(`Show results test`, () => {
   it(`Not all answers correct`, () => {
     currentGame = formTestGameState(5, 3, 1, -1, 2);
 
-    assert.equal(showResults(currentGame.answers, currentGame.lives), `-1`);
+    assert.equal(showResults(currentGame.answers, currentGame.lives), `1100`);
   });
 });
 
