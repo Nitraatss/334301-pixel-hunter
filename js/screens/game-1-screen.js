@@ -1,8 +1,6 @@
 import GameScreen from './game-screen';
 import GameOneView from '../view/game-1-view';
 
-const AVERAGE_TIME = 15;
-
 export default class GameOneScreen extends GameScreen {
   constructor(model) {
     super(model);
@@ -19,15 +17,16 @@ export default class GameOneScreen extends GameScreen {
     this._screen = new GameOneView(this.model, this.getCurrentQuestion());
 
     this._screen.checkAnswers = (firstOptionValue, secondOptionValue, question) => {
+      this.stopTicking();
       if (question.optionOne.correctAnswerValue === firstOptionValue && question.optionTwo.correctAnswerValue === secondOptionValue) {
         this.model.addAnswer({
           correct: true,
-          time: AVERAGE_TIME
+          time: this.calculateTime()
         });
       } else {
         this.model.addAnswer({
           correct: false,
-          time: AVERAGE_TIME
+          time: this.calculateTime()
         });
 
         this.model.looseLife();

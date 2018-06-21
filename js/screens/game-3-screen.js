@@ -1,8 +1,6 @@
 import GameScreen from './game-screen';
 import GameThreeView from '../view/game-3-view';
 
-const AVERAGE_TIME = 15;
-
 export default class GameThreeScreen extends GameScreen {
   constructor(model) {
     super(model);
@@ -14,15 +12,16 @@ export default class GameThreeScreen extends GameScreen {
     this._screen = new GameThreeView(this.model, this.getCurrentQuestion());
 
     this._screen.checkAnswer = (answer) => {
+      this.stopTicking();
       if (answer === `paint`) {
         this.model.addAnswer({
           correct: true,
-          time: AVERAGE_TIME
+          time: this.calculateTime()
         });
       } else {
         this.model.addAnswer({
           correct: false,
-          time: AVERAGE_TIME
+          time: this.calculateTime()
         });
 
         this.model.looseLife();

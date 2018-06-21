@@ -1,10 +1,14 @@
 import Application from '../application';
 import gameData from '../game-data';
+import {Timer} from '../timer';
 
 const STARTING_GAME_SCREEN_INDEX = 0;
 const FINAL_GAME_SCREEN_INDEX = 9;
 const ANSWERS_NUMBER = 10;
 const NO_LIVES = 0;
+const FAILED_TIME = 30;
+
+let interval;
 
 export default class GameScreen {
   constructor(model) {
@@ -61,6 +65,8 @@ export default class GameScreen {
 
       if (currentGameIndex >= STARTING_GAME_SCREEN_INDEX && currentGameIndex <= FINAL_GAME_SCREEN_INDEX) {
         this.showGame(gameData, currentGameIndex);
+
+        this.startTicking();
       } else {
         Application.showStats();
       }
@@ -68,22 +74,37 @@ export default class GameScreen {
   }
 
   startTicking() {
-    this.checkTime();
+    this.timer = new Timer(this.model.timeLimit);
 
-    this.interval = setInterval(this.checkTime.bind(this), 1000);
+    interval = setInterval(this.checkTime.bind(this), 1000);
   }
 
   stopTicking() {
-    clearInterval(this.interval);
+    clearInterval(interval);
   }
 
   checkTime() {
-    if (timer.tick() <= 0) {
+    if (this.timer.tick() <= 0) {
       this.stopTicking();
-      Application.showResult();
+
+      this.model.looseLife();
+
+      this.model.addAnswer({
+        correct: false,
+        time: FAILED_TIME
+      });
+
+      this.showNextGame();
     } else {
-      timer.updateTime();
-      timer.updateTimerSeconds();
+      this.timer.updateTime();
     }
+  }
+
+  calculateTime() {
+    const currentTime = document.querySelector(`.game__timer`).textContent;
+
+    const spendedTime = this.model.timeLimit - currentTime;
+
+    return spendedTime;
   }
 }
