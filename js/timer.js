@@ -20,7 +20,7 @@ export class Timer {
   }
 }
 
-export const createTimer = (timerLimit) => ({
+export const createTestTimer = (timerLimit) => ({
   tick: () => {
     return --timerLimit > MINIMUM_TIME ? timerLimit : `Ваше время вышло`;
   }
