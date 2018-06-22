@@ -1,5 +1,4 @@
 import AbstractView from './abstract-view';
-import createDOMElement from '../create-dom-element';
 import showFooter from '../screens/parts/show-footer';
 
 class GreetingView extends AbstractView {
@@ -24,10 +23,6 @@ class GreetingView extends AbstractView {
       </div>
       ${showFooter()}
     `;
-  }
-
-  render() {
-    return createDOMElement(this.template);
   }
 
   bind() {

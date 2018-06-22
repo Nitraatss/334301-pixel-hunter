@@ -1,5 +1,4 @@
 import AbstractView from './abstract-view';
-import createDOMElement from '../create-dom-element';
 import activateBackButton from '../activate-back-button';
 import showFooter from '../screens/parts/show-footer';
 import formGameHeader from '../screens/parts/form-game-header';
@@ -40,16 +39,12 @@ class GameTwoView extends AbstractView {
     `;
   }
 
-  render() {
-    return createDOMElement(this.template);
-  }
-
   bind() {
     const gameAnswers = this.element.querySelectorAll(`.game__answer`);
 
     gameAnswers.forEach((answer) => {
       answer.querySelector(`input`).addEventListener(`change`, (evtInp) => {
-        this.onInputChange(evtInp);
+        this.onInputChange(evtInp.target.value);
       });
     });
 

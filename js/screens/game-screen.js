@@ -76,6 +76,8 @@ export default class GameScreen {
   startTicking() {
     this.timer = new Timer(this.model.timeLimit);
 
+    this.checkTime();
+
     interval = setInterval(this.checkTime.bind(this), 1000);
   }
 

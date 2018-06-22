@@ -1,5 +1,4 @@
 import AbstractView from './abstract-view';
-import createDOMElement from '../create-dom-element';
 import showFooter from '../screens/parts/show-footer';
 import activateBackButton from '../activate-back-button';
 
@@ -38,10 +37,6 @@ class RulesView extends AbstractView {
     `;
   }
 
-  render() {
-    return createDOMElement(this.template);
-  }
-
   bind() {
     const rulesInput = this.element.querySelector(`.rules__input`);
     const rulesButton = this.element.querySelector(`.rules__button`);
@@ -50,13 +45,14 @@ class RulesView extends AbstractView {
       this.onRulesInputChange(rulesButton, rulesInput);
     });
     rulesButton.addEventListener(`click`, () => {
-      this.onRulesButtonClick(rulesInput);
+      this.onRulesButtonClick(rulesInput.value);
     });
 
     activateBackButton(this.element);
   }
 
-  onRulesInputChange() {
+  onRulesInputChange(rulesButton, rulesInput) {
+    rulesButton.disabled = !rulesInput.value;
   }
 
   onRulesButtonClick() {

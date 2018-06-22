@@ -1,5 +1,4 @@
 import AbstractView from './abstract-view';
-import createDOMElement from '../create-dom-element';
 import activateBackButton from '../activate-back-button';
 import showFooter from '../screens/parts/show-footer';
 import formGameHeader from '../screens/parts/form-game-header';
@@ -30,16 +29,12 @@ class GameThreeView extends AbstractView {
     `;
   }
 
-  render() {
-    return createDOMElement(this.template);
-  }
-
   bind() {
     const gameOptions = this.element.querySelectorAll(`.game__option`);
 
     gameOptions.forEach((option) => {
       option.addEventListener(`click`, (evtOp) => {
-        this.onOptionClick(evtOp);
+        this.onOptionClick(evtOp.target.firstElementChild.alt);
       });
     });
 

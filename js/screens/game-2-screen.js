@@ -28,8 +28,7 @@ export default class GameTwoScreen extends GameScreen {
       }
     };
 
-    this._screen.onInputChange = (evtInp) => {
-      const currentAnswer = evtInp.target.value;
+    this._screen.onInputChange = (currentAnswer) => {
 
       this._screen.checkAnswer(currentAnswer, this._screen.currentQuestion);
       this.showNextGame();

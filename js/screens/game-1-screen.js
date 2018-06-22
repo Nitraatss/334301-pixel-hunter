@@ -1,6 +1,7 @@
 import GameScreen from './game-screen';
 import GameOneView from '../view/game-1-view';
 
+
 export default class GameOneScreen extends GameScreen {
   constructor(model) {
     super(model);
@@ -18,6 +19,7 @@ export default class GameOneScreen extends GameScreen {
 
     this._screen.checkAnswers = (firstOptionValue, secondOptionValue, question) => {
       this.stopTicking();
+
       if (question.optionOne.correctAnswerValue === firstOptionValue && question.optionTwo.correctAnswerValue === secondOptionValue) {
         this.model.addAnswer({
           correct: true,
@@ -33,13 +35,13 @@ export default class GameOneScreen extends GameScreen {
       }
     };
 
-    this._screen.onInputChange = (evtInp) => {
-      if (evtInp.target.name === `question1`) {
+    this._screen.onInputChange = (inputName, inputValue) => {
+      if (inputName === `question1`) {
         firstQuestionChecked = true;
-        firstAnswer = evtInp.target.value;
+        firstAnswer = inputValue;
       } else {
         secondQuestionChecked = true;
-        secondAnswer = evtInp.target.value;
+        secondAnswer = inputValue;
       }
 
       if (firstQuestionChecked && secondQuestionChecked) {

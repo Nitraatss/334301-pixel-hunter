@@ -1,3 +1,5 @@
+import createDOMElement from '../create-dom-element';
+
 class AbstractView {
   constructor() {
   }
@@ -17,6 +19,7 @@ class AbstractView {
   }
 
   render() {
+    return createDOMElement(this.template);
   }
 
   bind() {

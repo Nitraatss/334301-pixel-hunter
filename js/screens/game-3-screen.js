@@ -28,9 +28,7 @@ export default class GameThreeScreen extends GameScreen {
       }
     };
 
-    this._screen.onOptionClick = (evtOp) => {
-      const currentAnswer = evtOp.target.firstElementChild.alt;
-
+    this._screen.onOptionClick = (currentAnswer) => {
       this._screen.checkAnswer(currentAnswer);
       this.showNextGame();
     };

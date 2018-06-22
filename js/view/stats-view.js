@@ -1,5 +1,4 @@
 import AbstractView from './abstract-view';
-import createDOMElement from '../create-dom-element';
 import activateBackButton from '../activate-back-button';
 import showFooter from '../screens/parts/show-footer';
 import {showResults} from '../show-results';
@@ -30,10 +29,6 @@ class GameThreeView extends AbstractView {
       </div>
       ${showFooter()}
     `;
-  }
-
-  render() {
-    return createDOMElement(this.template);
   }
 
   bind() {
