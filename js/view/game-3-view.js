@@ -17,7 +17,7 @@ class GameThreeView extends AbstractView {
       <div class="game">
         <p class="game__task">Найдите рисунок среди изображений</p>
         <form class="game__content  game__content--triple">
-          ${this.formOptionsMArkup(this.currentQuestion.options)}
+          ${this.formOptionsMArkup(this.currentQuestion.answers)}
         </form>
         <div class="stats">
           <ul class="stats">
@@ -45,7 +45,7 @@ class GameThreeView extends AbstractView {
     return options.map((option) => {
       return `
       <div class="game__option">
-        <img src="${option.src}" alt="${option.alt}" width="304" height="455">
+        <img src="${option.image.url}" alt="${option.type}" width="${option.image.width}" height="${option.image.height}">
       </div>
     `;
     }).join(` `);

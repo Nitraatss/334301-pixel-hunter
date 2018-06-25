@@ -18,8 +18,13 @@ export default class GameScreen {
   init() {
   }
 
-  initGame() {
+  resetGame() {
     this.model.resetParams();
+    const rulesInput = this._screen.element.querySelector(`.rules__input`);
+    const rulesButton = this._screen.element.querySelector(`.rules__button`);
+
+    rulesInput.value = this.model.playerName;
+    rulesButton.disabled = !rulesInput.value;
   }
 
   get screen() {
@@ -27,19 +32,19 @@ export default class GameScreen {
   }
 
   getCurrentQuestion() {
-    return gameData[this.model.gameIndex];
+    return gameData.allQuestions[this.model.gameIndex];
   }
 
   showGame(questions, gameIndex) {
-    if (questions[gameIndex].type === `game-1`) {
+    if (questions[gameIndex].type === `two-of-two`) {
       Application.showGameOne();
     }
 
-    if (questions[gameIndex].type === `game-2`) {
+    if (questions[gameIndex].type === `tinder-like`) {
       Application.showGameTwo();
     }
 
-    if (questions[gameIndex].type === `game-3`) {
+    if (questions[gameIndex].type === `one-of-three`) {
       Application.showGameThree();
     }
   }
@@ -64,7 +69,7 @@ export default class GameScreen {
       const currentGameIndex = this.model.gameIndex;
 
       if (currentGameIndex >= STARTING_GAME_SCREEN_INDEX && currentGameIndex <= FINAL_GAME_SCREEN_INDEX) {
-        this.showGame(gameData, currentGameIndex);
+        this.showGame(gameData.allQuestions, currentGameIndex);
 
         this.startTicking();
       } else {

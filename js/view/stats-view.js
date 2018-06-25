@@ -109,7 +109,7 @@ class GameThreeView extends AbstractView {
           <td class="result__extra">Штраф за медлительность:</td>
           <td class="result__extra">${slowAnswerCounter}&nbsp;<span class="stats__result stats__result--slow"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">-${slowAnswerCounter * 50}}</td>
+          <td class="result__total">-${slowAnswerCounter * 50}</td>
         </tr>
       `;
     } else {

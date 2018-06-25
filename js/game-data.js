@@ -1,152 +1,48 @@
-import {getRandomInt, shuffleArray} from './utils';
+import createDOMElement from './create-dom-element';
 
-const GAMES_NUMBER = 10;
-const GAME_ONE_INDEX = 1;
-const GAME_TWO_INDEX = 2;
-const GAME_THREE_INDEX = 3;
+const DATA_SERVER = `https://es.dump.academy/pixel-hunter/questions`;
 
-class GameServices {
+class LoadService {
   constructor() {
-    this.images = {
-      paintings: [
-        // People
-        `https://k42.kn3.net/CF42609C8.jpg`,
-
-        // Animals
-        `https://k42.kn3.net/D2F0370D6.jpg`,
-
-        // Nature
-        `https://k32.kn3.net/5C7060EC5.jpg`
-      ],
-      photos: [
-        // People
-        `http://i.imgur.com/1KegWPz.jpg`,
-
-        // Animals
-        `https://i.imgur.com/DiHM5Zb.jpg`,
-
-        // Nature
-        `http://i.imgur.com/DKR1HtB.jpg`
-      ]
-    };
+    this.allQuestions = [];
   }
 
-  formGameOneQuestion(data) {
-    let question;
-
-    if (getRandomInt(0, 1)) {
-      question = {
-        optionOne: {
-          src: data.paintings[getRandomInt(0, (data.paintings.length - 1))],
-          correctAnswerValue: `paint`
-        },
-
-        optionTwo: {
-          src: data.photos[getRandomInt(0, (data.photos.length - 1))],
-          correctAnswerValue: `photo`
-        },
-
-        type: `game-1`
-      };
-    } else {
-      question = {
-        optionOne: {
-          src: data.photos[getRandomInt(0, (data.photos.length - 1))],
-          correctAnswerValue: `photo`
-        },
-
-        optionTwo: {
-          src: data.paintings[getRandomInt(0, (data.paintings.length - 1))],
-          correctAnswerValue: `paint`
-        },
-
-        type: `game-1`
-      };
+  checkLoad(response) {
+    if (response.ok) {
+      return response.json();
+    } else if (response.status === 404) {
+      return [];
     }
-
-    return question;
+    return this.showError(`Неизвестный статус: ${response.status} ${response.statusText}`);
   }
 
-  formGameTwoQuestion(data) {
-    let question;
+  showError(errorMessage) {
+    const errorMarkup = `
+      <section class="modal-error modal-error__wrap">
+        <div class="modal-error__inner">
+          <h2 class="modal-error__title">Произошла ошибка!</h2>
+          <p class="modal-error__text">${errorMessage}</p>
+          <p class="modal-error__text">Пожалуйста, перезагрузите страницу.</p>
+        </div>
+      </section>
+    `;
 
-    if (getRandomInt(0, 1)) {
-      question = {
-        src: data.paintings[getRandomInt(0, (data.paintings.length - 1))],
-        correctAnswerValue: `paint`,
-        type: `game-2`
-      };
-    } else {
-      question = {
-        src: data.photos[getRandomInt(0, (data.photos.length - 1))],
-        correctAnswerValue: `photo`,
-        type: `game-2`
-      };
-    }
+    const errorModal = createDOMElement(errorMarkup);
 
-    return question;
+    const body = document.querySelector(`body`);
+
+    body.appendChild(errorModal);
   }
 
-  formGameThreeQuestion(data) {
-    let photoIndex;
-    let firstPhotoIndex;
-
-    const question = {
-      options: [],
-      type: `game-3`
-    };
-
-    question.options.push({
-      src: data.paintings[getRandomInt(0, (data.photos.length - 1))],
-      alt: `paint`
-    });
-
-    for (let i = 0; i < 2; i++) {
-      if (!i) {
-        firstPhotoIndex = getRandomInt(0, (data.photos.length - 1));
-
-        photoIndex = firstPhotoIndex;
-      } else {
-        while (photoIndex === firstPhotoIndex) {
-          photoIndex = getRandomInt(0, (data.photos.length - 1));
-        }
-      }
-
-      question.options.push({
-        src: data.photos[photoIndex],
-        alt: `photo`
-      });
-    }
-
-    shuffleArray(question.options);
-
-    return question;
+  formQuestions(questions) {
+    this.allQuestions = questions;
   }
 
-  formGameData() {
-    let data = this.images;
-    let allQuestions = [];
-
-    for (let i = 0; i < GAMES_NUMBER; i++) {
-      const gameIndex = getRandomInt(1, 3);
-
-      if (gameIndex === GAME_ONE_INDEX) {
-        allQuestions.push(this.formGameOneQuestion(data));
-      }
-
-      if (gameIndex === GAME_TWO_INDEX) {
-        allQuestions.push(this.formGameTwoQuestion(data));
-      }
-
-      if (gameIndex === GAME_THREE_INDEX) {
-        allQuestions.push(this.formGameThreeQuestion(data));
-      }
-    }
-
-    return allQuestions;
+  loadQuestions() {
+    return fetch(DATA_SERVER).then(this.checkLoad).then(this.formQuestions.bind(this)).catch(this.showError);
   }
 }
 
-const gameData = new GameServices().formGameData();
+const gameData = new LoadService();
 
 export default gameData;

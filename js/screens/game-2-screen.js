@@ -13,7 +13,7 @@ export default class GameTwoScreen extends GameScreen {
 
     this._screen.checkAnswer = (answer, question) => {
       this.stopTicking();
-      if (answer === question.correctAnswerValue) {
+      if (answer === question.type) {
         this.model.addAnswer({
           correct: true,
           time: this.calculateTime()
@@ -29,8 +29,7 @@ export default class GameTwoScreen extends GameScreen {
     };
 
     this._screen.onInputChange = (currentAnswer) => {
-
-      this._screen.checkAnswer(currentAnswer, this._screen.currentQuestion);
+      this._screen.checkAnswer(currentAnswer, this._screen.currentQuestion.answers[0]);
       this.showNextGame();
     };
   }

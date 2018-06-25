@@ -17,10 +17,10 @@ export default class GameOneScreen extends GameScreen {
 
     this._screen = new GameOneView(this.model, this.getCurrentQuestion());
 
-    this._screen.checkAnswers = (firstOptionValue, secondOptionValue, question) => {
+    this._screen.checkAnswers = (firstOptionValue, secondOptionValue, answers) => {
       this.stopTicking();
 
-      if (question.optionOne.correctAnswerValue === firstOptionValue && question.optionTwo.correctAnswerValue === secondOptionValue) {
+      if (answers[0].type === firstOptionValue && answers[1].type === secondOptionValue) {
         this.model.addAnswer({
           correct: true,
           time: this.calculateTime()
@@ -45,7 +45,7 @@ export default class GameOneScreen extends GameScreen {
       }
 
       if (firstQuestionChecked && secondQuestionChecked) {
-        this._screen.checkAnswers(firstAnswer, secondAnswer, this._screen.currentQuestion);
+        this._screen.checkAnswers(firstAnswer, secondAnswer, this._screen.currentQuestion.answers);
         this.showNextGame();
       }
     };
