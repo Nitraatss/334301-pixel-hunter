@@ -2,7 +2,7 @@ import Application from "./application";
 
 const activateBackButton = (element) => {
   const onButtonBackClick = () => {
-    Application.showGreeting();
+    Application.showRules();
   };
 
   const buttonBack = element.querySelector(`button.back`);

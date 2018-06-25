@@ -1,4 +1,7 @@
 const MINIMUM_TIME = 0;
+const EDGE_TIME = 5;
+const BASIC_COLOR = `#00222d`;
+const RED_COLOR = `red`;
 
 export class Timer {
   constructor(time) {
@@ -12,6 +15,14 @@ export class Timer {
       gameTimer.textContent = this.time;
     } else {
       gameTimer.textContent = MINIMUM_TIME;
+    }
+
+    if (this.time <= EDGE_TIME) {
+      if (this.time % 2 === 0) {
+        gameTimer.style.color = BASIC_COLOR;
+      } else {
+        gameTimer.style.color = RED_COLOR;
+      }
     }
   }
 

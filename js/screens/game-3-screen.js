@@ -13,7 +13,7 @@ export default class GameThreeScreen extends GameScreen {
 
     this._screen.checkAnswer = (answer) => {
       this.stopTicking();
-      if (answer === `paint`) {
+      if (answer === `painting`) {
         this.model.addAnswer({
           correct: true,
           time: this.calculateTime()
