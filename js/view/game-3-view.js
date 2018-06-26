@@ -30,11 +30,12 @@ class GameThreeView extends AbstractView {
   }
 
   bind() {
-    const gameOptions = this.element.querySelectorAll(`div.game__option`);
+    const gameContent = this.element.querySelector(`.game__content`);
+    const gameOptionsImages = gameContent.querySelectorAll(`img`);
 
-    gameOptions.forEach((option) => {
-      option.addEventListener(`click`, (evtOp) => {
-        this.onOptionClick(evtOp.target.firstElementChild.alt);
+    gameOptionsImages.forEach((option) => {
+      option.addEventListener(`click`, () => {
+        this.onOptionClick(option.alt);
       });
     });
 
