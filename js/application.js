@@ -8,6 +8,8 @@ import GameOneScreen from './screens/game-1-screen';
 import GameTwoScreen from './screens/game-2-screen';
 import GameThreeScreen from './screens/game-3-screen';
 import gameData from './game-data';
+import {showResults} from './show-results';
+import {StatsService} from './game-data';
 
 export default class Application {
   static showIntro() {
@@ -45,8 +47,27 @@ export default class Application {
   }
 
   static showStats() {
-    const gameScreen = new StatsScreen(gameState);
-    showScreen(gameScreen.screen);
+    gameState.finalResult = showResults(gameState.answers, gameState.lives);
+
+    const gameStats = new StatsService(gameState.playerName);
+
+    gameStats.saveResult(
+        {
+          playerName: gameState.playerName,
+          lives: gameState.lives,
+          answers: gameState.answers,
+          result: gameState.result
+        }
+    ).then(
+        () => {
+          gameStats.loadResults().then(
+              () => {
+                const gameScreen = new StatsScreen(gameState, gameStats.previousResults.reverse());
+                showScreen(gameScreen.screen);
+              }
+          );
+        }
+    );
   }
 }
 

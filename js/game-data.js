@@ -1,10 +1,11 @@
 import createDOMElement from './create-dom-element';
 
 const DATA_SERVER = `https://es.dump.academy/pixel-hunter/questions`;
+const APP_ID = `2448148822122`;
+const RESULTS_SERVER = `https://es.dump.academy/pixel-hunter/stats/`;
 
-class LoadService {
+class NetworkService {
   constructor() {
-    this.allQuestions = [];
   }
 
   checkLoad(response) {
@@ -33,6 +34,13 @@ class LoadService {
 
     body.appendChild(errorModal);
   }
+}
+
+class LoadService extends NetworkService {
+  constructor() {
+    super();
+    this.allQuestions = [];
+  }
 
   formQuestions(questions) {
     this.allQuestions = questions;
@@ -44,5 +52,32 @@ class LoadService {
 }
 
 const gameData = new LoadService();
+
+export class StatsService extends NetworkService {
+  constructor(username) {
+    super();
+    this.previousResults = [];
+    this.resultsUrl = RESULTS_SERVER + APP_ID + `-` + username;
+  }
+
+  saveResult(result) {
+    return fetch(`${this.resultsUrl}`, {
+      method: `POST`,
+      body: JSON.stringify(result),
+      headers: {
+        'Content-Type': `application/json`
+      }
+    }).
+      catch(this.showError);
+  }
+
+  formResults(results) {
+    this.previousResults = results;
+  }
+
+  loadResults() {
+    return fetch(this.resultsUrl).then(this.checkLoad).then(this.formResults.bind(this)).catch(this.showError);
+  }
+}
 
 export default gameData;

@@ -1,14 +1,13 @@
 import AbstractView from './abstract-view';
 import activateBackButton from '../activate-back-button';
 import showFooter from '../screens/parts/show-footer';
-import {showResults} from '../show-results';
 import formStatsListMarkup from '../screens/parts/form-stats-list-markup';
 
 const FAST_TIME = 10;
 const SLOW_TIME = 20;
 const STATS_INDEX = -1;
 
-class GameThreeView extends AbstractView {
+class StatsView extends AbstractView {
   constructor(gameState, gameHistory) {
     super();
     this.gameState = gameState;
@@ -26,7 +25,7 @@ class GameThreeView extends AbstractView {
         </div>
       </header>
       <div class="result">
-        ${this.formTabelsMarkup(this.gameState, this.gameHistory)}
+        ${this.formTabelsMarkup(this.gameHistory)}
       </div>
       ${showFooter()}
     `;
@@ -177,23 +176,14 @@ class GameThreeView extends AbstractView {
   `;
   }
 
-  formTabelsMarkup(currentGame, history) {
-    currentGame.finalResult = showResults(currentGame.answers, currentGame.lives);
-
-    history.addGame({
-      playerName: currentGame.playerName,
-      lives: currentGame.lives,
-      answers: currentGame.answers,
-      result: currentGame.result
-    });
-
+  formTabelsMarkup(history) {
     let tabelId = 0;
 
-    return history.allGames.map((game) => {
+    return history.map((result) => {
       tabelId = tabelId + 1;
-      return this.formTabelMarkup(game, tabelId);
+      return this.formTabelMarkup(result, tabelId);
     }).join(` `);
   }
 }
 
-export default GameThreeView;
+export default StatsView;
