@@ -30,7 +30,7 @@ class GameThreeView extends AbstractView {
   }
 
   bind() {
-    const gameOptions = this.element.querySelectorAll(`.game__option`);
+    const gameOptions = this.element.querySelectorAll(`div.game__option`);
 
     gameOptions.forEach((option) => {
       option.addEventListener(`click`, (evtOp) => {
@@ -59,3 +59,4 @@ class GameThreeView extends AbstractView {
 }
 
 export default GameThreeView;
+

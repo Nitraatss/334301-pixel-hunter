@@ -3,8 +3,9 @@ import showFooter from '../screens/parts/show-footer';
 import activateBackButton from '../activate-back-button';
 
 class RulesView extends AbstractView {
-  constructor() {
+  constructor(gameState) {
     super();
+    this.gameState = gameState;
   }
 
   get template() {
@@ -40,6 +41,11 @@ class RulesView extends AbstractView {
   bind() {
     const rulesInput = this.element.querySelector(`.rules__input`);
     const rulesButton = this.element.querySelector(`.rules__button`);
+
+    if (this.gameState.playerName) {
+      rulesInput.value = this.gameState.playerName;
+      rulesButton.disabled = !rulesInput.value;
+    }
 
     rulesInput.addEventListener(`input`, () => {
       this.onRulesInputChange(rulesButton, rulesInput);

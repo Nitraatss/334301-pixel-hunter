@@ -6,6 +6,7 @@ import formStatsListMarkup from '../screens/parts/form-stats-list-markup';
 
 const FAST_TIME = 10;
 const SLOW_TIME = 20;
+const STATS_INDEX = -1;
 
 class GameThreeView extends AbstractView {
   constructor(gameState, gameHistory) {
@@ -33,6 +34,7 @@ class GameThreeView extends AbstractView {
 
   bind() {
     activateBackButton(this.element);
+    this.gameState.gameIndex = STATS_INDEX;
   }
 
   checkAnswers() {

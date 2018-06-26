@@ -20,11 +20,6 @@ export default class GameScreen {
 
   resetGame() {
     this.model.resetParams();
-    const rulesInput = this._screen.element.querySelector(`.rules__input`);
-    const rulesButton = this._screen.element.querySelector(`.rules__button`);
-
-    rulesInput.value = this.model.playerName;
-    rulesButton.disabled = !rulesInput.value;
   }
 
   get screen() {

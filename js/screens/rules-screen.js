@@ -8,7 +8,7 @@ export default class RulesScreen extends GameScreen {
   }
 
   init() {
-    this._screen = new RulesView();
+    this._screen = new RulesView(this.model);
 
     this.resetGame();
     this.stopTicking();
