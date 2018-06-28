@@ -51,13 +51,13 @@ class LoadService extends NetworkService {
   }
 }
 
-const gameData = new LoadService();
+export const gameData = new LoadService();
 
-export class StatsService extends NetworkService {
+export default class StatsService extends NetworkService {
   constructor(username) {
     super();
     this.previousResults = [];
-    this.resultsUrl = RESULTS_SERVER + APP_ID + `-` + username;
+    this.resultsUrl = `${RESULTS_SERVER}${APP_ID}-${username}`;
   }
 
   saveResult(result) {
@@ -79,5 +79,3 @@ export class StatsService extends NetworkService {
     return fetch(this.resultsUrl).then(this.checkLoad).then(this.formResults.bind(this)).catch(this.showError);
   }
 }
-
-export default gameData;

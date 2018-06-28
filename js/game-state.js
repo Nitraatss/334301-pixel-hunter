@@ -8,6 +8,14 @@ class GameModel {
     this.result = ``;
   }
 
+  set newPlayerName(newName) {
+    this.playerName = newName;
+  }
+
+  set finalResult(calculatedResult) {
+    this.result = calculatedResult;
+  }
+
   gameIndexInc() {
     this.gameIndex = this.gameIndex + 1;
   }
@@ -18,14 +26,6 @@ class GameModel {
 
   addAnswer(answer) {
     this.answers.push(answer);
-  }
-
-  set newPlayerName(newName) {
-    this.playerName = newName;
-  }
-
-  set finalResult(calculatedResult) {
-    this.result = calculatedResult;
   }
 
   resetParams() {

@@ -7,9 +7,9 @@ import StatsScreen from './screens/stats-screen';
 import GameOneScreen from './screens/game-1-screen';
 import GameTwoScreen from './screens/game-2-screen';
 import GameThreeScreen from './screens/game-3-screen';
-import gameData from './game-data';
+import {gameData} from './game-data';
 import {showResults} from './show-results';
-import {StatsService} from './game-data';
+import StatsService from './game-data';
 
 export default class Application {
   static showIntro() {
