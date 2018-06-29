@@ -15,7 +15,7 @@ class GameOneView extends AbstractView {
     return `
       ${formGameHeader(this.gameState.lives, this.gameState.timeLimit)}
       <div class="game">
-        <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
+        <p class="game__task">${this.currentQuestion.question}</p>
         <form class="game__content">
           ${this.formOptionsMArkup(this.currentQuestion.answers)}
         </form>
@@ -42,25 +42,20 @@ class GameOneView extends AbstractView {
   }
 
   formOptionsMArkup(options) {
-    let optionID = 0;
-
-    return options.map((option) => {
-      optionID++;
-
-      return `
+    return options.map((option, optionId) => `
         <div class="game__option">
           <img src="${option.image.url}" alt="${option.type}" width="${option.image.width}" height="${option.image.height}">
           <label class="game__answer game__answer--photo">
-            <input name="question${optionID}" type="radio" value="photo">
+            <input name="question${optionId}" type="radio" value="photo">
             <span>Фото</span>
           </label>
           <label class="game__answer game__answer--paint">
-            <input name="question${optionID}" type="radio" value="painting">
+            <input name="question${optionId}" type="radio" value="painting">
             <span>Рисунок</span>
           </label>
         </div>
-      `;
-    }).join(` `);
+      `
+    ).join(` `);
   }
 
   onInputChange() {

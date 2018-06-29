@@ -1,5 +1,5 @@
 import Application from '../application';
-import gameData from '../game-data/load-service';
+import gameData from '../game-data/game-data';
 import {Timer} from '../timer';
 
 const STARTING_GAME_SCREEN_INDEX = 0;

@@ -39,85 +39,6 @@ class StatsView extends AbstractView {
   checkAnswers() {
   }
 
-  formCorrectAnswersMarkup(answers) {
-    let correctAnswersResult = 0;
-
-    answers.forEach((answer) => {
-      if (answer.correct) {
-        correctAnswersResult = correctAnswersResult + 100;
-      }
-    });
-
-    return `
-      <td class="result__points">×&nbsp;100</td>
-      <td class="result__total">${correctAnswersResult}</td>
-  `;
-  }
-
-  formFastAnswersMarkup(answers) {
-    let fastAnswerCounter = 0;
-
-    answers.forEach((answer) => {
-      if (answer.time < FAST_TIME && answer.correct) {
-        fastAnswerCounter = fastAnswerCounter + 1;
-      }
-    });
-
-    if (fastAnswerCounter) {
-      return `
-        <tr>
-          <td></td>
-          <td class="result__extra">Бонус за скорость:</td>
-          <td class="result__extra">${fastAnswerCounter}&nbsp;<span class="stats__result stats__result--fast"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${fastAnswerCounter * 50}</td>
-        </tr>
-      `;
-    } else {
-      return ``;
-    }
-  }
-
-  formLivesMarkup(lives) {
-    if (lives) {
-      return `
-      <tr>
-        <td></td>
-        <td class="result__extra">Бонус за жизни:</td>
-        <td class="result__extra">${lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
-        <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">${lives * 50}</td>
-      </tr>
-    `;
-    } else {
-      return ``;
-    }
-  }
-
-  formSlowAnswersMarkup(answers) {
-    let slowAnswerCounter = 0;
-
-    answers.forEach((answer) => {
-      if (answer.time > SLOW_TIME && answer.correct) {
-        slowAnswerCounter = slowAnswerCounter + 1;
-      }
-    });
-
-    if (slowAnswerCounter) {
-      return `
-        <tr>
-          <td></td>
-          <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">${slowAnswerCounter}&nbsp;<span class="stats__result stats__result--slow"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">-${slowAnswerCounter * 50}</td>
-        </tr>
-      `;
-    } else {
-      return ``;
-    }
-  }
-
   formTabelMarkup(game, tabelNumber) {
     const tabelMarkup = {
       headerText: ``,
@@ -140,10 +61,10 @@ class StatsView extends AbstractView {
     }
 
     if (game.result > 0) {
-      tabelMarkup.correctAnswersResult = this.formCorrectAnswersMarkup(game.answers);
-      tabelMarkup.fastAnswers = this.formFastAnswersMarkup(game.answers);
-      tabelMarkup.lives = this.formLivesMarkup(game.lives);
-      tabelMarkup.slowAnswers = this.formSlowAnswersMarkup(game.answers);
+      tabelMarkup.correctAnswersResult = StatsView.formCorrectAnswersMarkup(game.answers);
+      tabelMarkup.fastAnswers = StatsView.formFastAnswersMarkup(game.answers);
+      tabelMarkup.lives = StatsView.formLivesMarkup(game.lives);
+      tabelMarkup.slowAnswers = StatsView.formSlowAnswersMarkup(game.answers);
       tabelMarkup.totalResult = `
       <tr>
         <td colspan="5" class="result__total  result__total--final">${game.result}</td>
@@ -183,6 +104,85 @@ class StatsView extends AbstractView {
       tabelId = tabelId + 1;
       return this.formTabelMarkup(result, tabelId);
     }).join(` `);
+  }
+
+  static formCorrectAnswersMarkup(answers) {
+    let correctAnswersResult = 0;
+
+    answers.forEach((answer) => {
+      if (answer.correct) {
+        correctAnswersResult = correctAnswersResult + 100;
+      }
+    });
+
+    return `
+      <td class="result__points">×&nbsp;100</td>
+      <td class="result__total">${correctAnswersResult}</td>
+  `;
+  }
+
+  static formFastAnswersMarkup(answers) {
+    let fastAnswerCounter = 0;
+
+    answers.forEach((answer) => {
+      if (answer.time < FAST_TIME && answer.correct) {
+        fastAnswerCounter = fastAnswerCounter + 1;
+      }
+    });
+
+    if (fastAnswerCounter) {
+      return `
+        <tr>
+          <td></td>
+          <td class="result__extra">Бонус за скорость:</td>
+          <td class="result__extra">${fastAnswerCounter}&nbsp;<span class="stats__result stats__result--fast"></span></td>
+          <td class="result__points">×&nbsp;50</td>
+          <td class="result__total">${fastAnswerCounter * 50}</td>
+        </tr>
+      `;
+    } else {
+      return ``;
+    }
+  }
+
+  static formLivesMarkup(lives) {
+    if (lives) {
+      return `
+      <tr>
+        <td></td>
+        <td class="result__extra">Бонус за жизни:</td>
+        <td class="result__extra">${lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
+        <td class="result__points">×&nbsp;50</td>
+        <td class="result__total">${lives * 50}</td>
+      </tr>
+    `;
+    } else {
+      return ``;
+    }
+  }
+
+  static formSlowAnswersMarkup(answers) {
+    let slowAnswerCounter = 0;
+
+    answers.forEach((answer) => {
+      if (answer.time > SLOW_TIME && answer.correct) {
+        slowAnswerCounter = slowAnswerCounter + 1;
+      }
+    });
+
+    if (slowAnswerCounter) {
+      return `
+        <tr>
+          <td></td>
+          <td class="result__extra">Штраф за медлительность:</td>
+          <td class="result__extra">${slowAnswerCounter}&nbsp;<span class="stats__result stats__result--slow"></span></td>
+          <td class="result__points">×&nbsp;50</td>
+          <td class="result__total">-${slowAnswerCounter * 50}</td>
+        </tr>
+      `;
+    } else {
+      return ``;
+    }
   }
 }
 

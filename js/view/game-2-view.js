@@ -15,7 +15,7 @@ class GameTwoView extends AbstractView {
     return `
       ${formGameHeader(this.gameState.lives, this.gameState.timeLimit)}
       <div class="game">
-        <p class="game__task">Угадай, фото или рисунок?</p>
+        <p class="game__task">${this.currentQuestion.question}</p>
         <form class="game__content  game__content--wide">
           <div class="game__option">
             <img src="${this.currentQuestion.answers[0].image.url}" alt="${this.currentQuestion.answers[0].type}" width="${this.currentQuestion.answers[0].image.width}" height="${this.currentQuestion.answers[0].image.height}">

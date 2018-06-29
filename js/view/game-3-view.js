@@ -15,7 +15,7 @@ class GameThreeView extends AbstractView {
     return `
       ${formGameHeader(this.gameState.lives, this.gameState.timeLimit)}
       <div class="game">
-        <p class="game__task">Найдите рисунок среди изображений</p>
+        <p class="game__task">${this.currentQuestion.question}</p>
         <form class="game__content  game__content--triple">
           ${this.formOptionsMArkup(this.currentQuestion.answers)}
         </form>
@@ -35,7 +35,7 @@ class GameThreeView extends AbstractView {
 
     gameOptionsImages.forEach((option) => {
       option.addEventListener(`click`, () => {
-        this.onOptionClick(option.alt);
+        this.onOptionClick(option.alt, this.currentQuestion.answers);
       });
     });
 
@@ -43,19 +43,21 @@ class GameThreeView extends AbstractView {
   }
 
   formOptionsMArkup(options) {
-    return options.map((option) => {
-      return `
+    return options.map((option) => `
       <div class="game__option">
         <img src="${option.image.url}" alt="${option.type}" width="${option.image.width}" height="${option.image.height}">
       </div>
-    `;
-    }).join(` `);
+    `
+    ).join(` `);
   }
 
   onOptionClick() {
   }
 
   checkAnswers() {
+  }
+
+  setCorrectAnswer() {
   }
 }
 

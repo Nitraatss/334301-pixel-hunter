@@ -7,7 +7,7 @@ import StatsScreen from './screens/stats-screen';
 import GameOneScreen from './screens/game-1-screen';
 import GameTwoScreen from './screens/game-2-screen';
 import GameThreeScreen from './screens/game-3-screen';
-import gameData from './game-data/load-service';
+import gameData from './game-data/game-data';
 import {showResults} from './show-results';
 import StatsService from './game-data/stats-service';
 
@@ -58,14 +58,14 @@ export default class Application {
           answers: gameState.answers,
           result: gameState.result
         }
-    ).then(
+    )
+    .then(
+        () => gameStats.loadResults()
+    )
+    .then(
         () => {
-          gameStats.loadResults().then(
-              () => {
-                const gameScreen = new StatsScreen(gameState, gameStats.previousResults.reverse());
-                showScreen(gameScreen.screen);
-              }
-          );
+          const gameScreen = new StatsScreen(gameState, gameStats.previousResults.reverse());
+          showScreen(gameScreen.screen);
         }
     );
   }

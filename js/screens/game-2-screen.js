@@ -13,6 +13,7 @@ export default class GameTwoScreen extends GameScreen {
 
     this._screen.checkAnswer = (answer, question) => {
       this.stopTicking();
+
       if (answer === question.type) {
         this.model.addAnswer({
           correct: true,

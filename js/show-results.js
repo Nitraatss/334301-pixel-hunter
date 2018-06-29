@@ -8,7 +8,7 @@ const FAST_TIME = 10;
 const SLOW_TIME = 20;
 
 export const formTestGameState = (normalAnswersNumber, fastAnswersNumber, slowAnswersNumber, incorrectAnswersNumber, livesNumber) => {
-  let currentGameState = {
+  const currentGameState = {
     answers: [],
     lives: livesNumber
   };
