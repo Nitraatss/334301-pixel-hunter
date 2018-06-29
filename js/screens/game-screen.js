@@ -1,5 +1,5 @@
 import Application from '../application';
-import gameData from '../game-data/game-data';
+import gameData from '../game-services/game-data';
 import {Timer} from '../timer';
 
 const STARTING_GAME_SCREEN_INDEX = 0;
@@ -7,8 +7,6 @@ const FINAL_GAME_SCREEN_INDEX = 9;
 const ANSWERS_NUMBER = 10;
 const NO_LIVES = 0;
 const FAILED_TIME = 30;
-
-let interval;
 
 export default class GameScreen {
   constructor(model) {
@@ -45,6 +43,8 @@ export default class GameScreen {
   }
 
   showNextGame() {
+    this.stopTicking();
+
     if (this.model.lives < NO_LIVES) {
       if (this.model.answers.length !== ANSWERS_NUMBER) {
         let i = this.model.answers.length;
@@ -68,6 +68,8 @@ export default class GameScreen {
 
         this.startTicking();
       } else {
+        this.stopTicking();
+
         Application.showStats();
       }
     }
@@ -78,11 +80,11 @@ export default class GameScreen {
 
     this.checkTime();
 
-    interval = setInterval(this.checkTime.bind(this), 1000);
+    this.interval = setInterval(this.checkTime.bind(this), 1000);
   }
 
   stopTicking() {
-    clearInterval(interval);
+    clearInterval(this.interval);
   }
 
   checkTime() {
