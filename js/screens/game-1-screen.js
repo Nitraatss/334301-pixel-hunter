@@ -1,7 +1,6 @@
 import GameScreen from './game-screen';
 import GameOneView from '../view/game-1-view';
 
-
 export default class GameOneScreen extends GameScreen {
   constructor(model) {
     super(model);

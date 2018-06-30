@@ -47,13 +47,11 @@ export default class GameScreen {
 
     if (this.model.lives < NO_LIVES) {
       if (this.model.answers.length !== ANSWERS_NUMBER) {
-        let i = this.model.answers.length;
-        while (i < (ANSWERS_NUMBER)) {
+        for (let i = this.model.answers.length; i < ANSWERS_NUMBER; i++) {
           this.model.addAnswer({
             answers: false,
             time: 0
           });
-          i++;
         }
       }
 
