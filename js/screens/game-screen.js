@@ -30,15 +30,15 @@ export default class GameScreen {
 
   showGame(questions, gameIndex) {
     if (questions[gameIndex].type === `two-of-two`) {
-      Application.showGameOne();
+      Application.showGameOne().startTicking();
     }
 
     if (questions[gameIndex].type === `tinder-like`) {
-      Application.showGameTwo();
+      Application.showGameTwo().startTicking();
     }
 
     if (questions[gameIndex].type === `one-of-three`) {
-      Application.showGameThree();
+      Application.showGameThree().startTicking();
     }
   }
 
@@ -65,11 +65,7 @@ export default class GameScreen {
 
       if (currentGameIndex >= STARTING_GAME_SCREEN_INDEX && currentGameIndex <= FINAL_GAME_SCREEN_INDEX) {
         this.showGame(gameData.allQuestions, currentGameIndex);
-
-        this.startTicking();
       } else {
-        this.stopTicking();
-
         Application.showStats();
       }
     }
@@ -84,7 +80,9 @@ export default class GameScreen {
   }
 
   stopTicking() {
-    clearInterval(this.interval);
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 
   checkTime() {

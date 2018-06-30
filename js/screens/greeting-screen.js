@@ -12,7 +12,6 @@ export default class GreetingScreen extends GameScreen {
     this._screen = new GreetingView();
 
     this.resetGame();
-    this.stopTicking();
 
     this._screen.onGreetingContinueClick = () => {
       Application.showRules();

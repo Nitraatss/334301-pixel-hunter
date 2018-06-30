@@ -34,16 +34,19 @@ export default class Application {
   static showGameOne() {
     const gameScreen = new GameOneScreen(gameState);
     showScreen(gameScreen.screen);
+    return gameScreen;
   }
 
   static showGameTwo() {
     const gameScreen = new GameTwoScreen(gameState);
     showScreen(gameScreen.screen);
+    return gameScreen;
   }
 
   static showGameThree() {
     const gameScreen = new GameThreeScreen(gameState);
     showScreen(gameScreen.screen);
+    return gameScreen;
   }
 
   static showStats() {
@@ -70,5 +73,3 @@ export default class Application {
     );
   }
 }
-
-
