@@ -1,6 +1,8 @@
 import GameScreen from './game-screen';
 import GameOneView from '../view/game-1-view';
 
+const FIRST_INPUT_ID = `0`;
+
 export default class GameOneScreen extends GameScreen {
   constructor(model) {
     super(model);
@@ -37,7 +39,7 @@ export default class GameOneScreen extends GameScreen {
     };
 
     this._screen.onInputChange = (inputName, inputValue) => {
-      if (inputName === `question1`) {
+      if (inputName === `question${FIRST_INPUT_ID}`) {
         firstQuestionChecked = true;
         firstAnswer = inputValue;
       } else {
