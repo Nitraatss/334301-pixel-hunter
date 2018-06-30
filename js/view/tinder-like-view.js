@@ -4,7 +4,7 @@ import showFooter from '../screens/parts/show-footer';
 import formGameHeader from '../screens/parts/form-game-header';
 import formStatsListMarkup from '../screens/parts/form-stats-list-markup';
 
-class GameTwoView extends AbstractView {
+class TinderLikeView extends AbstractView {
   constructor(gameState, currentQuestion) {
     super();
     this.gameState = gameState;
@@ -61,4 +61,4 @@ class GameTwoView extends AbstractView {
   }
 }
 
-export default GameTwoView;
+export default TinderLikeView;

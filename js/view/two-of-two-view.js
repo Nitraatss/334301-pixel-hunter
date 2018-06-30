@@ -4,7 +4,7 @@ import showFooter from '../screens/parts/show-footer';
 import formGameHeader from '../screens/parts/form-game-header';
 import formStatsListMarkup from '../screens/parts/form-stats-list-markup';
 
-class GameOneView extends AbstractView {
+class TwoOfTwoView extends AbstractView {
   constructor(gameState, currentQuestion) {
     super();
     this.gameState = gameState;
@@ -68,4 +68,4 @@ class GameOneView extends AbstractView {
   }
 }
 
-export default GameOneView;
+export default TwoOfTwoView;

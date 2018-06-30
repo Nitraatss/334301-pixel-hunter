@@ -1,7 +1,7 @@
 import GameScreen from './game-screen';
-import GameTwoView from '../view/game-2-view';
+import TinderLikeView from '../view/tinder-like-view';
 
-export default class GameTwoScreen extends GameScreen {
+export default class TinderLikeScreen extends GameScreen {
   constructor(model) {
     super(model);
 
@@ -9,7 +9,7 @@ export default class GameTwoScreen extends GameScreen {
   }
 
   init() {
-    this._screen = new GameTwoView(this.model, this.getCurrentQuestion());
+    this._screen = new TinderLikeView(this.model, this.getCurrentQuestion());
 
     this._screen.onBackButton = () => this.stopTicking();
 

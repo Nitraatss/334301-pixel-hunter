@@ -35,15 +35,15 @@ export default class GameScreen {
 
   showGame(questions, gameIndex) {
     if (questions[gameIndex].type === QuestionType.TWO_OF_TWO) {
-      Application.showGameOne().startTicking();
+      Application.showGameTwoOfTwo().startTicking();
     }
 
     if (questions[gameIndex].type === QuestionType.TINDER_LIKE) {
-      Application.showGameTwo().startTicking();
+      Application.showGameTinderLike().startTicking();
     }
 
     if (questions[gameIndex].type === QuestionType.ONE_OF_THREE) {
-      Application.showGameThree().startTicking();
+      Application.showGameOneOfThree().startTicking();
     }
   }
 

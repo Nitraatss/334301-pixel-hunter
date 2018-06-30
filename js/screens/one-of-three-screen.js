@@ -1,5 +1,5 @@
 import GameScreen from './game-screen';
-import GameThreeView from '../view/game-3-view';
+import OneOfThreeView from '../view/one-of-three-view';
 
 const PHOTO_TYPE_QUESTION_INCORRECT_OPTIONS_NUMBER = 2;
 const AnswerType = {
@@ -7,7 +7,7 @@ const AnswerType = {
   PHOTO: `photo`
 };
 
-export default class GameThreeScreen extends GameScreen {
+export default class OneOfThreeScreen extends GameScreen {
   constructor(model) {
     super(model);
 
@@ -15,7 +15,7 @@ export default class GameThreeScreen extends GameScreen {
   }
 
   init() {
-    this._screen = new GameThreeView(this.model, this.getCurrentQuestion());
+    this._screen = new OneOfThreeView(this.model, this.getCurrentQuestion());
 
     this._screen.onBackButton = () => this.stopTicking();
 

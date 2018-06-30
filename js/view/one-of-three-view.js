@@ -4,7 +4,7 @@ import showFooter from '../screens/parts/show-footer';
 import formGameHeader from '../screens/parts/form-game-header';
 import formStatsListMarkup from '../screens/parts/form-stats-list-markup';
 
-class GameThreeView extends AbstractView {
+class OneOfThreeView extends AbstractView {
   constructor(gameState, currentQuestion) {
     super();
     this.gameState = gameState;
@@ -64,5 +64,5 @@ class GameThreeView extends AbstractView {
   }
 }
 
-export default GameThreeView;
+export default OneOfThreeView;
 
