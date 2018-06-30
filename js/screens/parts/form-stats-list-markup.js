@@ -1,6 +1,8 @@
-const FAST_TIME = 10;
-const SLOW_TIME = 20;
 const ANSWERS_NUMBER = 10;
+const TimeLimit = {
+  FAST: 10,
+  SLOW: 20
+};
 
 const fillAnswers = (answers) => {
   if (answers.length === ANSWERS_NUMBER) {
@@ -25,9 +27,9 @@ const formStatsListMarkup = (allAnswers) => {
   const filledAnswers = fillAnswers(allAnswers);
 
   return filledAnswers.map((answer) => {
-    if (answer.correct && answer.time < FAST_TIME) {
+    if (answer.correct && answer.time < TimeLimit.FAST) {
       return `<li class="stats__result stats__result--fast"></li>`;
-    } else if (answer.correct && answer.time > SLOW_TIME) {
+    } else if (answer.correct && answer.time > TimeLimit.SLOW) {
       return `<li class="stats__result stats__result--slow"></li>`;
     } else if (answer.correct) {
       return `<li class="stats__result stats__result--correct"></li>`;

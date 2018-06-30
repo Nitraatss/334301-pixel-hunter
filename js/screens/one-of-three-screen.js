@@ -15,7 +15,7 @@ export default class OneOfThreeScreen extends GameScreen {
   }
 
   init() {
-    this._screen = new OneOfThreeView(this.model, this.getCurrentQuestion());
+    this._screen = new OneOfThreeView(this._model, this.getCurrentQuestion());
 
     this._screen.onBackButton = () => this.stopTicking();
 
@@ -41,17 +41,17 @@ export default class OneOfThreeScreen extends GameScreen {
       const correctAnswer = this._screen.setCorrectAnswer(options);
 
       if (answer === correctAnswer) {
-        this.model.addAnswer({
+        this._model.addAnswer({
           correct: true,
           time: this.calculateTime()
         });
       } else {
-        this.model.addAnswer({
+        this._model.addAnswer({
           correct: false,
           time: this.calculateTime()
         });
 
-        this.model.looseLife();
+        this._model.looseLife();
       }
     };
 

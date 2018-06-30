@@ -8,10 +8,10 @@ export default class RulesScreen extends GameScreen {
   }
 
   init() {
-    this._screen = new RulesView(this.model);
+    this._screen = new RulesView(this._model);
 
     this._screen.onRulesButtonClick = (rulesInputvalue) => {
-      this.model.newPlayerName = rulesInputvalue;
+      this._model.newPlayerName = rulesInputvalue;
       this.showNextGame();
     };
   }

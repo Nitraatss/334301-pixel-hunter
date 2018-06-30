@@ -5,13 +5,13 @@ export default class StatsScreen extends GameScreen {
   constructor(model, stats) {
     super(model);
 
-    this.stats = stats;
+    this._stats = stats;
 
     this.init();
   }
 
   init() {
-    this._screen = new StatsView(this.model, this.stats);
+    this._screen = new StatsView(this._model, this._stats);
   }
 }
 

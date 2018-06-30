@@ -15,14 +15,14 @@ const QuestionType = {
 
 export default class GameScreen {
   constructor(model) {
-    this.model = model;
+    this._model = model;
   }
 
   init() {
   }
 
   resetGame() {
-    this.model.resetParams();
+    this._model.resetParams();
   }
 
   get screen() {
@@ -30,7 +30,7 @@ export default class GameScreen {
   }
 
   getCurrentQuestion() {
-    return gameData.allQuestions[this.model.gameIndex];
+    return gameData.allQuestions[this._model.gameIndex];
   }
 
   showGame(questions, gameIndex) {
@@ -50,10 +50,10 @@ export default class GameScreen {
   showNextGame() {
     this.stopTicking();
 
-    if (this.model.lives < NO_LIVES) {
-      if (this.model.answers.length !== ANSWERS_NUMBER) {
-        for (let i = this.model.answers.length; i < ANSWERS_NUMBER; i++) {
-          this.model.addAnswer({
+    if (this._model.lives < NO_LIVES) {
+      if (this._model.answers.length !== ANSWERS_NUMBER) {
+        for (let i = this._model.answers.length; i < ANSWERS_NUMBER; i++) {
+          this._model.addAnswer({
             answers: false,
             time: 0
           });
@@ -62,9 +62,9 @@ export default class GameScreen {
 
       Application.showStats();
     } else {
-      this.model.gameIndexInc();
+      this._model.gameIndexInc();
 
-      const currentGameIndex = this.model.gameIndex;
+      const currentGameIndex = this._model.gameIndex;
 
       if (currentGameIndex >= STARTING_GAME_SCREEN_INDEX && currentGameIndex <= FINAL_GAME_SCREEN_INDEX) {
         this.showGame(gameData.allQuestions, currentGameIndex);
@@ -75,7 +75,7 @@ export default class GameScreen {
   }
 
   startTicking() {
-    this.timer = new Timer(this.model.timeLimit);
+    this.timer = new Timer(this._model.timeLimit);
 
     this.checkTime();
 
@@ -92,9 +92,9 @@ export default class GameScreen {
     if (this.timer.tick() <= 0) {
       this.stopTicking();
 
-      this.model.looseLife();
+      this._model.looseLife();
 
-      this.model.addAnswer({
+      this._model.addAnswer({
         correct: false,
         time: FAILED_TIME
       });
@@ -108,7 +108,7 @@ export default class GameScreen {
   calculateTime() {
     const currentTime = document.querySelector(`.game__timer`).textContent;
 
-    const spendedTime = this.model.timeLimit - currentTime;
+    const spendedTime = this._model.timeLimit - currentTime;
 
     return spendedTime;
   }
