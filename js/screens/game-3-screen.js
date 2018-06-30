@@ -2,6 +2,10 @@ import GameScreen from './game-screen';
 import GameThreeView from '../view/game-3-view';
 
 const PHOTO_TYPE_QUESTION_INCORRECT_OPTIONS_NUMBER = 2;
+const AnswerType = {
+  PAINTING: `painting`,
+  PHOTO: `photo`
+};
 
 export default class GameThreeScreen extends GameScreen {
   constructor(model) {
@@ -17,7 +21,7 @@ export default class GameThreeScreen extends GameScreen {
 
     this._screen.setCorrectAnswer = (options) => {
       const numberOfPaintingOptions = options.reduce(function (accumulator, item) {
-        if (item.type === `painting`) {
+        if (item.type === AnswerType.PAINTING) {
           return accumulator + 1;
         } else {
           return accumulator;
@@ -25,9 +29,9 @@ export default class GameThreeScreen extends GameScreen {
       }, 0);
 
       if (numberOfPaintingOptions === PHOTO_TYPE_QUESTION_INCORRECT_OPTIONS_NUMBER) {
-        return `photo`;
+        return AnswerType.PHOTO;
       } else {
-        return `painting`;
+        return AnswerType.PAINTING;
       }
     };
 

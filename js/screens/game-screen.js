@@ -7,6 +7,11 @@ const FINAL_GAME_SCREEN_INDEX = 9;
 const ANSWERS_NUMBER = 10;
 const NO_LIVES = 0;
 const FAILED_TIME = 30;
+const QuestionType = {
+  TWO_OF_TWO: `two-of-two`,
+  TINDER_LIKE: `tinder-like`,
+  ONE_OF_THREE: `one-of-three`
+};
 
 export default class GameScreen {
   constructor(model) {
@@ -29,15 +34,15 @@ export default class GameScreen {
   }
 
   showGame(questions, gameIndex) {
-    if (questions[gameIndex].type === `two-of-two`) {
+    if (questions[gameIndex].type === QuestionType.TWO_OF_TWO) {
       Application.showGameOne().startTicking();
     }
 
-    if (questions[gameIndex].type === `tinder-like`) {
+    if (questions[gameIndex].type === QuestionType.TINDER_LIKE) {
       Application.showGameTwo().startTicking();
     }
 
-    if (questions[gameIndex].type === `one-of-three`) {
+    if (questions[gameIndex].type === QuestionType.ONE_OF_THREE) {
       Application.showGameThree().startTicking();
     }
   }
