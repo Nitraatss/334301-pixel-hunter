@@ -16,6 +16,8 @@ export default class GameOneScreen extends GameScreen {
 
     this._screen = new GameOneView(this.model, this.getCurrentQuestion());
 
+    this._screen.onBackButton = () => this.stopTicking();
+
     this._screen.checkAnswers = (firstOptionValue, secondOptionValue, answers) => {
       this.stopTicking();
 

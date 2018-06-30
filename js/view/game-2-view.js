@@ -48,13 +48,16 @@ class GameTwoView extends AbstractView {
       });
     });
 
-    activateBackButton(this.element);
+    activateBackButton(this.element, this.onBackButton.bind(this));
   }
 
   onInputChange() {
   }
 
   checkAnswer() {
+  }
+
+  onBackButton() {
   }
 }
 

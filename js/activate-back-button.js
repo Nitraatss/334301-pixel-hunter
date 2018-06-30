@@ -5,7 +5,7 @@ import createDOMElement from "./create-dom-element";
 const FIRST_GAME_SCREEN_INDEX = 0;
 const FINAL_GAME_SCREEN_INDEX = 9;
 
-const showConfirmModal = () => {
+const showConfirmModal = (stopTimer = () => {}) => {
   const errorMarkup = `
       <section class="modal-confirm modal-confirm__wrap">
         <form class="modal-confirm__inner">
@@ -30,6 +30,7 @@ const showConfirmModal = () => {
       button.addEventListener(`click`, (evtB) => {
         evtB.preventDefault();
 
+        stopTimer();
         Application.showGreeting();
         body.removeChild(body.lastChild);
       });
@@ -52,11 +53,12 @@ const showConfirmModal = () => {
   body.appendChild(errorModal);
 };
 
-const activateBackButton = (element) => {
+const activateBackButton = (element, stopTimer = () => {}) => {
   const onButtonBackClick = () => {
     if (gameState.gameIndex >= FIRST_GAME_SCREEN_INDEX && gameState.gameIndex <= FINAL_GAME_SCREEN_INDEX) {
-      showConfirmModal();
+      showConfirmModal(stopTimer);
     } else {
+      stopTimer();
       Application.showGreeting();
     }
   };

@@ -38,7 +38,7 @@ class GameOneView extends AbstractView {
       });
     });
 
-    activateBackButton(this.element);
+    activateBackButton(this.element, this.onBackButton.bind(this));
   }
 
   formOptionsMArkup(options) {
@@ -62,6 +62,9 @@ class GameOneView extends AbstractView {
   }
 
   checkAnswers() {
+  }
+
+  onBackButton() {
   }
 }
 

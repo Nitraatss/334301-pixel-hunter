@@ -13,6 +13,8 @@ export default class GameThreeScreen extends GameScreen {
   init() {
     this._screen = new GameThreeView(this.model, this.getCurrentQuestion());
 
+    this._screen.onBackButton = () => this.stopTicking();
+
     this._screen.setCorrectAnswer = (options) => {
       const numberOfPaintingOptions = options.reduce(function (accumulator, item) {
         if (item.type === `painting`) {

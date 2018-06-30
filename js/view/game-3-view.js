@@ -39,7 +39,7 @@ class GameThreeView extends AbstractView {
       });
     });
 
-    activateBackButton(this.element);
+    activateBackButton(this.element, this.onBackButton.bind(this));
   }
 
   formOptionsMArkup(options) {
@@ -58,6 +58,9 @@ class GameThreeView extends AbstractView {
   }
 
   setCorrectAnswer() {
+  }
+
+  onBackButton() {
   }
 }
 

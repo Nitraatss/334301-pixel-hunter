@@ -11,6 +11,8 @@ export default class GameTwoScreen extends GameScreen {
   init() {
     this._screen = new GameTwoView(this.model, this.getCurrentQuestion());
 
+    this._screen.onBackButton = () => this.stopTicking();
+
     this._screen.checkAnswer = (answer, question) => {
       this.stopTicking();
 
