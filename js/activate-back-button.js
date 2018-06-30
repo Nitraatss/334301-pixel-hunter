@@ -29,10 +29,7 @@ const showConfirmModal = () => {
     if (counter === 0) {
       button.addEventListener(`click`, (evtB) => {
         evtB.preventDefault();
-        let intervals = window.setInterval(() => { }, 9999);
-        for (let i = 1; i < intervals; i++) {
-          window.clearInterval(i);
-        }
+
         Application.showGreeting();
         body.removeChild(body.lastChild);
       });
@@ -60,11 +57,6 @@ const activateBackButton = (element) => {
     if (gameState.gameIndex >= FIRST_GAME_SCREEN_INDEX && gameState.gameIndex <= FINAL_GAME_SCREEN_INDEX) {
       showConfirmModal();
     } else {
-      let intervals = window.setInterval(()=>{}, 9999);
-      for (let i = 1; i < intervals; i++) {
-        window.clearInterval(i);
-      }
-
       Application.showGreeting();
     }
   };
