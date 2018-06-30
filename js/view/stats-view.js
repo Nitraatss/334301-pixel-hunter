@@ -39,7 +39,7 @@ class StatsView extends AbstractView {
   checkAnswers() {
   }
 
-  formTabelMarkup(game, tabelNumber) {
+  _formTabelMarkup(game, tabelNumber) {
     const tabelMarkup = {
       headerText: ``,
       listItems: ``,
@@ -102,7 +102,7 @@ class StatsView extends AbstractView {
 
     return history.map((result) => {
       tabelId = tabelId + 1;
-      return this.formTabelMarkup(result, tabelId);
+      return this._formTabelMarkup(result, tabelId);
     }).join(` `);
   }
 
@@ -156,9 +156,9 @@ class StatsView extends AbstractView {
         <td class="result__total">${lives * 50}</td>
       </tr>
     `;
-    } else {
-      return ``;
     }
+
+    return ``;
   }
 
   static formSlowAnswersMarkup(answers) {

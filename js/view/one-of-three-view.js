@@ -17,7 +17,7 @@ class OneOfThreeView extends AbstractView {
       <div class="game">
         <p class="game__task">${this.currentQuestion.question}</p>
         <form class="game__content  game__content--triple">
-          ${this.formOptionsMarkup(this.currentQuestion.answers)}
+          ${this._formOptionsMarkup(this.currentQuestion.answers)}
         </form>
         <div class="stats">
           <ul class="stats">
@@ -42,7 +42,7 @@ class OneOfThreeView extends AbstractView {
     activateBackButton(this.element, this.onBackButton.bind(this));
   }
 
-  formOptionsMarkup(options) {
+  _formOptionsMarkup(options) {
     return options.map((option) => `
       <div class="game__option">
         <img src="${option.image.url}" alt="${option.type}" width="${option.image.width}" height="${option.image.height}">

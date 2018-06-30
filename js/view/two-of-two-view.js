@@ -17,7 +17,7 @@ class TwoOfTwoView extends AbstractView {
       <div class="game">
         <p class="game__task">${this.currentQuestion.question}</p>
         <form class="game__content">
-          ${this.formOptionsMarkup(this.currentQuestion.answers)}
+          ${this._formOptionsMarkup(this.currentQuestion.answers)}
         </form>
         <div class="stats">
           <ul class="stats">
@@ -41,7 +41,7 @@ class TwoOfTwoView extends AbstractView {
     activateBackButton(this.element, this.onBackButton.bind(this));
   }
 
-  formOptionsMarkup(options) {
+  _formOptionsMarkup(options) {
     return options.map((option, optionId) => `
         <div class="game__option">
           <img src="${option.image.url}" alt="${option.type}" width="${option.image.width}" height="${option.image.height}">
