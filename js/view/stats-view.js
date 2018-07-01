@@ -111,30 +111,30 @@ class StatsView extends AbstractView {
   }
 
   static formFastAnswersMarkup(answers) {
-    const fastAnswers = answers.filter((answer) => answer.time < FAST_TIME && answer.correct);
+    const fastAnswersNumber = answers.filter((answer) => answer.time < FAST_TIME && answer.correct).length;
 
-    return fastAnswers.length ? `
+    return fastAnswersNumber ? `
         <tr>
           <td></td>
           <td class="result__extra">Бонус за скорость:</td>
-          <td class="result__extra">${fastAnswers.length}&nbsp;<span class="stats__result stats__result--fast"></span></td>
+          <td class="result__extra">${fastAnswersNumber}&nbsp;<span class="stats__result stats__result--fast"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${fastAnswers.length * 50}</td>
+          <td class="result__total">${fastAnswersNumber}</td>
         </tr>
       ` :
       ``;
   }
 
   static formSlowAnswersMarkup(answers) {
-    const slowAnswers = answers.filter((answer) => answer.time > SLOW_TIME && answer.correct);
+    const slowAnswersNumber = answers.filter((answer) => answer.time > SLOW_TIME && answer.correct).length;
 
-    return slowAnswers.length ? `
+    return slowAnswersNumber ? `
         <tr>
           <td></td>
           <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">${slowAnswers.length}&nbsp;<span class="stats__result stats__result--slow"></span></td>
+          <td class="result__extra">${slowAnswersNumber}&nbsp;<span class="stats__result stats__result--slow"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">-${slowAnswers.length * 50}</td>
+          <td class="result__total">-${slowAnswersNumber * 50}</td>
         </tr>
       ` :
       ``;
