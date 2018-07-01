@@ -85,7 +85,7 @@ class StatsView extends AbstractView {
       ${tabelMarkup.headerText}
       <table class="result__table">
         <tr>
-          <td class="result__number">${tabelNumber}.</td>
+          <td class="result__number">${tabelNumber + 1}.</td>
           <td colspan="2">
             <ul class="stats">
               ${tabelMarkup.listItems}
