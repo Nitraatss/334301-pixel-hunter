@@ -125,6 +125,19 @@ class StatsView extends AbstractView {
       ``;
   }
 
+  static formLivesMarkup(lives) {
+    return lives ? `
+      <tr>
+        <td></td>
+        <td class="result__extra">Бонус за жизни:</td>
+        <td class="result__extra">${lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
+        <td class="result__points">×&nbsp;50</td>
+        <td class="result__total">${lives * 50}</td>
+      </tr>
+    ` :
+      ``;
+  }
+
   static formSlowAnswersMarkup(answers) {
     const slowAnswersNumber = answers.filter((answer) => answer.time > SLOW_TIME && answer.correct).length;
 
@@ -137,19 +150,6 @@ class StatsView extends AbstractView {
           <td class="result__total">-${slowAnswersNumber * 50}</td>
         </tr>
       ` :
-      ``;
-  }
-
-  static formLivesMarkup(lives) {
-    return lives ? `
-      <tr>
-        <td></td>
-        <td class="result__extra">Бонус за жизни:</td>
-        <td class="result__extra">${lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
-        <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">${lives * 50}</td>
-      </tr>
-    ` :
       ``;
   }
 }
