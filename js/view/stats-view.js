@@ -7,6 +7,13 @@ const FAST_TIME = 10;
 const SLOW_TIME = 20;
 const STATS_INDEX = -1;
 
+const Points = {
+  NORMAL: 100,
+  FAST: 50,
+  SLOW: 50,
+  LIVES: 50
+};
+
 class StatsView extends AbstractView {
   constructor(gameState, gameHistory) {
     super();
@@ -102,10 +109,10 @@ class StatsView extends AbstractView {
   }
 
   static formCorrectAnswersMarkup(answers) {
-    const correctAnswersResult = answers.reduce((accumulator, answer) => answer.correct ? accumulator + 100 : accumulator, 0);
+    const correctAnswersResult = answers.reduce((accumulator, answer) => answer.correct ? accumulator + Points.NORMAL : accumulator, 0);
 
     return `
-      <td class="result__points">×&nbsp;100</td>
+      <td class="result__points">×&nbsp;${Points.NORMAL}</td>
       <td class="result__total">${correctAnswersResult}</td>
   `;
   }
@@ -118,8 +125,8 @@ class StatsView extends AbstractView {
           <td></td>
           <td class="result__extra">Бонус за скорость:</td>
           <td class="result__extra">${fastAnswersNumber}&nbsp;<span class="stats__result stats__result--fast"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${fastAnswersNumber * 50}</td>
+          <td class="result__points">×&nbsp;${Points.FAST}</td>
+          <td class="result__total">${fastAnswersNumber * Points.FAST}</td>
         </tr>
       ` :
       ``;
@@ -131,8 +138,8 @@ class StatsView extends AbstractView {
         <td></td>
         <td class="result__extra">Бонус за жизни:</td>
         <td class="result__extra">${lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
-        <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">${lives * 50}</td>
+        <td class="result__points">×&nbsp;${Points.LIVES}</td>
+        <td class="result__total">${lives * Points.LIVES}</td>
       </tr>
     ` :
       ``;
@@ -146,8 +153,8 @@ class StatsView extends AbstractView {
           <td></td>
           <td class="result__extra">Штраф за медлительность:</td>
           <td class="result__extra">${slowAnswersNumber}&nbsp;<span class="stats__result stats__result--slow"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">-${slowAnswersNumber * 50}</td>
+          <td class="result__points">×&nbsp;${Points.SLOW}</td>
+          <td class="result__total">-${slowAnswersNumber * Points.SLOW}</td>
         </tr>
       ` :
       ``;
