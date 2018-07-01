@@ -21,33 +21,30 @@ const showConfirmModal = (stopTimer = () => {}) => {
     `;
 
   const errorModal = createDOMElement(errorMarkup);
+  const body = document.querySelector(`body`);
+  body.appendChild(errorModal);
+
   const modalClose = errorModal.querySelector(`.modal-confirm__close`);
-  const confirmButtons = errorModal.querySelectorAll(`.modal-confirm__btn`);
+  const modalConfirmButtonWrapper = errorModal.querySelector(`.modal-confirm__btn-wrap`);
+  const confirmButton = modalConfirmButtonWrapper.childNodes[1];
+  const canselButton = modalConfirmButtonWrapper.childNodes[3];
 
-  confirmButtons.forEach((button, index) => {
-    if (index === 0) {
-      button.addEventListener(`click`, (evtB) => {
-        evtB.preventDefault();
+  confirmButton.addEventListener(`click`, (evtB) => {
+    evtB.preventDefault();
 
-        stopTimer();
-        Application.showGreeting();
-        body.removeChild(body.lastChild);
-      });
-    } else {
-      button.addEventListener(`click`, (evtB) => {
-        evtB.preventDefault();
-        body.removeChild(body.lastChild);
-      });
-    }
+    stopTimer();
+    Application.showGreeting();
+    body.removeChild(body.lastChild);
+  });
+
+  canselButton.addEventListener(`click`, (evtB) => {
+    evtB.preventDefault();
+    body.removeChild(body.lastChild);
   });
 
   modalClose.addEventListener(`click`, () => {
     body.removeChild(body.lastChild);
   });
-
-  const body = document.querySelector(`body`);
-
-  body.appendChild(errorModal);
 };
 
 const activateBackButton = (element, stopTimer = () => {}) => {

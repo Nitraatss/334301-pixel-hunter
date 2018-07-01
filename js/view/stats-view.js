@@ -2,9 +2,8 @@ import AbstractView from './abstract-view';
 import activateBackButton from '../activate-back-button';
 import showFooter from '../screens/parts/show-footer';
 import formStatsListMarkup from '../screens/parts/form-stats-list-markup';
+import {TimeLimit} from '../utils';
 
-const FAST_TIME = 10;
-const SLOW_TIME = 20;
 const STATS_INDEX = -1;
 
 const Points = {
@@ -118,7 +117,7 @@ class StatsView extends AbstractView {
   }
 
   static formFastAnswersMarkup(answers) {
-    const fastAnswersNumber = answers.filter((answer) => answer.time < FAST_TIME && answer.correct).length;
+    const fastAnswersNumber = answers.filter((answer) => answer.time < TimeLimit.FAST && answer.correct).length;
 
     return fastAnswersNumber ? `
         <tr>
@@ -146,7 +145,7 @@ class StatsView extends AbstractView {
   }
 
   static formSlowAnswersMarkup(answers) {
-    const slowAnswersNumber = answers.filter((answer) => answer.time > SLOW_TIME && answer.correct).length;
+    const slowAnswersNumber = answers.filter((answer) => answer.time > TimeLimit.SLOW && answer.correct).length;
 
     return slowAnswersNumber ? `
         <tr>

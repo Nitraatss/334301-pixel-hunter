@@ -1,8 +1,6 @@
+import {TimeLimit} from "../../utils";
+
 const ANSWERS_NUMBER = 10;
-const TimeLimit = {
-  FAST: 10,
-  SLOW: 20
-};
 
 const fillAnswers = (answers) => {
   if (answers.length === ANSWERS_NUMBER) {
