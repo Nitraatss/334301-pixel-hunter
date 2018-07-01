@@ -119,7 +119,7 @@ class StatsView extends AbstractView {
           <td class="result__extra">Бонус за скорость:</td>
           <td class="result__extra">${fastAnswersNumber}&nbsp;<span class="stats__result stats__result--fast"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${fastAnswersNumber}</td>
+          <td class="result__total">${fastAnswersNumber * 50}</td>
         </tr>
       ` :
       ``;
