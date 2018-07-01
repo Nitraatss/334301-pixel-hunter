@@ -7,6 +7,13 @@ const FAST_TIME = 10;
 const SLOW_TIME = 20;
 const STATS_INDEX = -1;
 
+const Points = {
+  NORMAL: 100,
+  FAST: 50,
+  SLOW: 50,
+  LIVES: 50
+};
+
 class StatsView extends AbstractView {
   constructor(gameState, gameHistory) {
     super();
@@ -25,7 +32,7 @@ class StatsView extends AbstractView {
         </div>
       </header>
       <div class="result">
-        ${this.formTabelsMarkup(this.gameHistory)}
+        ${this._formTabelsMarkup(this.gameHistory)}
       </div>
       ${showFooter()}
     `;
@@ -39,7 +46,11 @@ class StatsView extends AbstractView {
   checkAnswers() {
   }
 
-  formTabelMarkup(game, tabelNumber) {
+  _formTabelsMarkup(history) {
+    return history.map((result, tabelId) => this._formTabelMarkup(result, tabelId)).join(` `);
+  }
+
+  _formTabelMarkup(game, tabelNumber) {
     const tabelMarkup = {
       headerText: ``,
       listItems: ``,
@@ -52,9 +63,9 @@ class StatsView extends AbstractView {
 
     tabelMarkup.listItems = formStatsListMarkup(game.answers);
 
-    if (tabelNumber === 1 && game.result > 0) {
+    if (!tabelNumber && game.result > 0) {
       tabelMarkup.headerText = `<h1>ПОБЕДА!</h1>`;
-    } else if (tabelNumber === 1 && game.result < 0) {
+    } else if (!tabelNumber && game.result < 0) {
       tabelMarkup.headerText = `<h1>FAIL</h1>`;
     } else {
       tabelMarkup.headerText = ``;
@@ -81,7 +92,7 @@ class StatsView extends AbstractView {
       ${tabelMarkup.headerText}
       <table class="result__table">
         <tr>
-          <td class="result__number">${tabelNumber}.</td>
+          <td class="result__number">${tabelNumber + 1}.</td>
           <td colspan="2">
             <ul class="stats">
               ${tabelMarkup.listItems}
@@ -97,92 +108,56 @@ class StatsView extends AbstractView {
   `;
   }
 
-  formTabelsMarkup(history) {
-    let tabelId = 0;
-
-    return history.map((result) => {
-      tabelId = tabelId + 1;
-      return this.formTabelMarkup(result, tabelId);
-    }).join(` `);
-  }
-
   static formCorrectAnswersMarkup(answers) {
-    let correctAnswersResult = 0;
-
-    answers.forEach((answer) => {
-      if (answer.correct) {
-        correctAnswersResult = correctAnswersResult + 100;
-      }
-    });
+    const correctAnswersResult = answers.reduce((accumulator, answer) => answer.correct ? accumulator + Points.NORMAL : accumulator, 0);
 
     return `
-      <td class="result__points">×&nbsp;100</td>
+      <td class="result__points">×&nbsp;${Points.NORMAL}</td>
       <td class="result__total">${correctAnswersResult}</td>
   `;
   }
 
   static formFastAnswersMarkup(answers) {
-    let fastAnswerCounter = 0;
+    const fastAnswersNumber = answers.filter((answer) => answer.time < FAST_TIME && answer.correct).length;
 
-    answers.forEach((answer) => {
-      if (answer.time < FAST_TIME && answer.correct) {
-        fastAnswerCounter = fastAnswerCounter + 1;
-      }
-    });
-
-    if (fastAnswerCounter) {
-      return `
+    return fastAnswersNumber ? `
         <tr>
           <td></td>
           <td class="result__extra">Бонус за скорость:</td>
-          <td class="result__extra">${fastAnswerCounter}&nbsp;<span class="stats__result stats__result--fast"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${fastAnswerCounter * 50}</td>
+          <td class="result__extra">${fastAnswersNumber}&nbsp;<span class="stats__result stats__result--fast"></span></td>
+          <td class="result__points">×&nbsp;${Points.FAST}</td>
+          <td class="result__total">${fastAnswersNumber * Points.FAST}</td>
         </tr>
-      `;
-    } else {
-      return ``;
-    }
+      ` :
+      ``;
   }
 
   static formLivesMarkup(lives) {
-    if (lives) {
-      return `
+    return lives ? `
       <tr>
         <td></td>
         <td class="result__extra">Бонус за жизни:</td>
         <td class="result__extra">${lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
-        <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">${lives * 50}</td>
+        <td class="result__points">×&nbsp;${Points.LIVES}</td>
+        <td class="result__total">${lives * Points.LIVES}</td>
       </tr>
-    `;
-    } else {
-      return ``;
-    }
+    ` :
+      ``;
   }
 
   static formSlowAnswersMarkup(answers) {
-    let slowAnswerCounter = 0;
+    const slowAnswersNumber = answers.filter((answer) => answer.time > SLOW_TIME && answer.correct).length;
 
-    answers.forEach((answer) => {
-      if (answer.time > SLOW_TIME && answer.correct) {
-        slowAnswerCounter = slowAnswerCounter + 1;
-      }
-    });
-
-    if (slowAnswerCounter) {
-      return `
+    return slowAnswersNumber ? `
         <tr>
           <td></td>
           <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">${slowAnswerCounter}&nbsp;<span class="stats__result stats__result--slow"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">-${slowAnswerCounter * 50}</td>
+          <td class="result__extra">${slowAnswersNumber}&nbsp;<span class="stats__result stats__result--slow"></span></td>
+          <td class="result__points">×&nbsp;${Points.SLOW}</td>
+          <td class="result__total">-${slowAnswersNumber * Points.SLOW}</td>
         </tr>
-      `;
-    } else {
-      return ``;
-    }
+      ` :
+      ``;
   }
 }
 

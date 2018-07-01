@@ -23,10 +23,9 @@ const showConfirmModal = (stopTimer = () => {}) => {
   const errorModal = createDOMElement(errorMarkup);
   const modalClose = errorModal.querySelector(`.modal-confirm__close`);
   const confirmButtons = errorModal.querySelectorAll(`.modal-confirm__btn`);
-  let counter = 0;
 
-  confirmButtons.forEach((button) => {
-    if (counter === 0) {
+  confirmButtons.forEach((button, index) => {
+    if (index === 0) {
       button.addEventListener(`click`, (evtB) => {
         evtB.preventDefault();
 
@@ -40,8 +39,6 @@ const showConfirmModal = (stopTimer = () => {}) => {
         body.removeChild(body.lastChild);
       });
     }
-
-    counter = counter + 1;
   });
 
   modalClose.addEventListener(`click`, () => {

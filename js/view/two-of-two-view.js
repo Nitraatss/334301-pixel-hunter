@@ -4,7 +4,7 @@ import showFooter from '../screens/parts/show-footer';
 import formGameHeader from '../screens/parts/form-game-header';
 import formStatsListMarkup from '../screens/parts/form-stats-list-markup';
 
-class GameOneView extends AbstractView {
+class TwoOfTwoView extends AbstractView {
   constructor(gameState, currentQuestion) {
     super();
     this.gameState = gameState;
@@ -17,7 +17,7 @@ class GameOneView extends AbstractView {
       <div class="game">
         <p class="game__task">${this.currentQuestion.question}</p>
         <form class="game__content">
-          ${this.formOptionsMArkup(this.currentQuestion.answers)}
+          ${this._formOptionsMarkup(this.currentQuestion.answers)}
         </form>
         <div class="stats">
           <ul class="stats">
@@ -41,7 +41,7 @@ class GameOneView extends AbstractView {
     activateBackButton(this.element, this.onBackButton.bind(this));
   }
 
-  formOptionsMArkup(options) {
+  _formOptionsMarkup(options) {
     return options.map((option, optionId) => `
         <div class="game__option">
           <img src="${option.image.url}" alt="${option.type}" width="${option.image.width}" height="${option.image.height}">
@@ -68,4 +68,4 @@ class GameOneView extends AbstractView {
   }
 }
 
-export default GameOneView;
+export default TwoOfTwoView;

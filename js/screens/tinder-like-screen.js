@@ -1,7 +1,7 @@
 import GameScreen from './game-screen';
-import GameTwoView from '../view/game-2-view';
+import TinderLikeView from '../view/tinder-like-view';
 
-export default class GameTwoScreen extends GameScreen {
+export default class TinderLikeScreen extends GameScreen {
   constructor(model) {
     super(model);
 
@@ -9,7 +9,7 @@ export default class GameTwoScreen extends GameScreen {
   }
 
   init() {
-    this._screen = new GameTwoView(this.model, this.getCurrentQuestion());
+    this._screen = new TinderLikeView(this._model, this.getCurrentQuestion());
 
     this._screen.onBackButton = () => this.stopTicking();
 
@@ -17,17 +17,17 @@ export default class GameTwoScreen extends GameScreen {
       this.stopTicking();
 
       if (answer === question.type) {
-        this.model.addAnswer({
+        this._model.addAnswer({
           correct: true,
           time: this.calculateTime()
         });
       } else {
-        this.model.addAnswer({
+        this._model.addAnswer({
           correct: false,
           time: this.calculateTime()
         });
 
-        this.model.looseLife();
+        this._model.looseLife();
       }
     };
 

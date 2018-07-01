@@ -4,9 +4,9 @@ import RulesScreen from './screens/rules-screen';
 import showScreen from './show-screen';
 import gameState from './game-state';
 import StatsScreen from './screens/stats-screen';
-import GameOneScreen from './screens/game-1-screen';
-import GameTwoScreen from './screens/game-2-screen';
-import GameThreeScreen from './screens/game-3-screen';
+import TwoOfTwoScreen from './screens/two-of-two-screen';
+import TinderLikeScreen from './screens/tinder-like-screen';
+import OneOfThreeScreen from './screens/one-of-three-screen';
 import gameData from './game-services/game-data';
 import {showResults} from './show-results';
 import StatsService from './game-services/stats-service';
@@ -31,20 +31,20 @@ export default class Application {
     showScreen(gameScreen.screen);
   }
 
-  static showGameOne() {
-    const gameScreen = new GameOneScreen(gameState);
+  static showGameTwoOfTwo() {
+    const gameScreen = new TwoOfTwoScreen(gameState);
     showScreen(gameScreen.screen);
     return gameScreen;
   }
 
-  static showGameTwo() {
-    const gameScreen = new GameTwoScreen(gameState);
+  static showGameTinderLike() {
+    const gameScreen = new TinderLikeScreen(gameState);
     showScreen(gameScreen.screen);
     return gameScreen;
   }
 
-  static showGameThree() {
-    const gameScreen = new GameThreeScreen(gameState);
+  static showGameOneOfThree() {
+    const gameScreen = new OneOfThreeScreen(gameState);
     showScreen(gameScreen.screen);
     return gameScreen;
   }
